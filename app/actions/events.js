@@ -1,6 +1,7 @@
 import { setLoading, setFailed, setSuccess } from './processor'
 import { RECEIVED_EVENTS } from '../constants'
 import { API_SERVER } from '../env'
+import _ from 'lodash'
 
 export const fetchEvents = (accessToken) => {
 	return async dispatch => {
@@ -15,7 +16,7 @@ export const fetchEvents = (accessToken) => {
 				}
 			})
 			const data = await response.json()
-			await dispatch(receivedEvents(data.data))
+			await dispatch(receivedEvents(_.groupBy(data.data, event => event.date)))
 			await dispatch(setSuccess(true, 'SUCCESS_FETCH_EVENTS'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_EVENTS'))
 		} catch (e) {

@@ -1,20 +1,15 @@
 import React, { PureComponent } from 'react'
 import { Icon } from 'native-base'
-import { View, Text, StyleSheet, BackHandler } from 'react-native'
+import { View, Text, StyleSheet, BackHandler, TouchableNativeFeedback } from 'react-native'
 import { connect } from 'react-redux'
 import { setNavigate } from '../actions/processor'
 import Calendar from '../components/Calendar'
+import { fetchEvents } from '../actions/events'
 
 class CalendarContainer extends PureComponent {
-  constructor() {
-    super()
-    this.state = {
-      items: {
-        '2018-03-19': [{time: '20:00 - 23:30', text: 'Event Pertama', description: 'Lorem ipsum dolor sit amet', place: 'Jakarta'}],
-        '2018-03-20': [{time: '20:00 - 23:30', text: 'Event Kedua', description: 'Lorem ipsum dolor sit amet', place: 'Jakarta'}],
-        '2018-03-21': [{time: '20:00 - 23:30', text: 'Event Ketiga', description: 'Lorem ipsum dolor sit amet', place: 'Jakarta'}]
-      }
-    }
+  componentDidMount() {
+    const { sessionPersistance, fetchEvents } = this.props
+    fetchEvents(sessionPersistance.accessToken)
   }
 
   componentWillMount() {
@@ -36,23 +31,26 @@ class CalendarContainer extends PureComponent {
   }
 
   renderItem(item) {
+    const { navigate } = this.props.navigation
     return (
-      <View style={[styles.item, {height: item.height}]}>
-        <View style={styles.viewContainer}>
-          <Text style={styles.textTitle}>{item.text}</Text>
-        </View>
-        <Text>{item.description}</Text>
-        <View style={styles.viewContainer}>
-          <View style={styles.viewContainerWithIcon}>
-            <Icon name='pin' style={styles.icon} />
-            <Text style={styles.place}>{item.place}</Text>
+      <TouchableNativeFeedback onPress={() => navigate('Event', item)}>
+        <View style={[styles.item, {height: item.height}]}>
+          <View style={styles.viewContainer}>
+            <Text style={styles.textTitle}>{item.title}</Text>
           </View>
-          <View style={styles.viewContainerWithIcon}>
-            <Icon name='time' style={styles.icon} />
-            <Text>{item.time}</Text>
+          <Text>{item.description}</Text>
+          <View style={styles.viewContainer}>
+            <View style={styles.viewContainerWithIcon}>
+              <Icon name='pin' style={styles.icon} />
+              <Text style={styles.place}>{item.place}</Text>
+            </View>
+            <View style={styles.viewContainerWithIcon}>
+              <Icon name='time' style={styles.icon} />
+              <Text>{`${item.time_start} - ${item.time_end}`}</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableNativeFeedback>
     )
   }
 
@@ -72,10 +70,11 @@ class CalendarContainer extends PureComponent {
   }
 
   render() {
+    const { events } = this.props
     return (
       <Calendar
         handleBack={() => this.handleBack()}
-        items={this.state.items}
+        items={events}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)} />
@@ -83,7 +82,13 @@ class CalendarContainer extends PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  events: state.events,
+  sessionPersistance: state.sessionPersistance
+})
+
 const mapDispatchToProps = dispatch => ({
+  fetchEvents: (accessToken) => dispatch(fetchEvents(accessToken)),
   setNavigate: (link, data) => dispatch(setNavigate(link, data))
 })
 
@@ -121,4 +126,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(null, mapDispatchToProps)(CalendarContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarContainer)

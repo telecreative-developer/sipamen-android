@@ -12,7 +12,7 @@ const Notification = (props) => (
           <FlatList
             refreshing={props.loadingNotifications}
             onRefresh={props.onRefreshNotifications}
-            data={props.notifications}
+            data={props.notifications.filter(notification => notification.type === 'comment')}
             keyExtractor={(item, index) => JSON.stringify(index)}
             renderItem={props.renderTimelineNotifications} />
         </Tab>
@@ -20,7 +20,7 @@ const Notification = (props) => (
           <FlatList
             refreshing={props.loadingNotifications}
             onRefresh={props.onRefreshNotifications}
-            data={props.notifications}
+            data={props.generalNotifications.filter(notification => notification.type === 'event')}
             keyExtractor={(item, index) => JSON.stringify(index)}
             renderItem={props.renderEventNotifications} />
         </Tab>
@@ -28,7 +28,7 @@ const Notification = (props) => (
           <FlatList
             refreshing={props.loadingNotifications}
             onRefresh={props.onRefreshNotifications}
-            data={props.notifications}
+            data={props.generalNotifications.filter(notification => notification.type === 'announcement')}
             keyExtractor={(item, index) => JSON.stringify(index)}
             renderItem={props.renderAnnouncementNotifications} />
         </Tab>

@@ -9,7 +9,7 @@ const Calendar = (props) => (
   <Container style={styles.container}>
     <Header>
       <Left>
-        <Icon name="md-arrow-back" style={styles.icon} onPress={props.handleBack} />
+        <Icon name='arrow-back' style={styles.icon} onPress={props.handleBack} />
       </Left>
       <Body>
         <Title>Kalender</Title>
