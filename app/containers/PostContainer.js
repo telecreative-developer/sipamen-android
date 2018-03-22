@@ -3,7 +3,7 @@ import { BackHandler } from 'react-native'
 import { connect } from 'react-redux'
 import Post from '../components/Post'
 import { fetchComments, sendComment } from '../actions/comments'
-import { setNavigate } from '../actions/processor';
+import { setNavigate } from '../actions/processor'
 
 class PostContainer extends React.Component {
   constructor() {

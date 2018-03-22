@@ -6,7 +6,6 @@ import { setNavigate } from '../actions/processor'
 
 class EventContainer extends React.PureComponent {
   componentWillMount() {
-    const { params } = this.props.navigation.state
     BackHandler.addEventListener('hardwareBackPress', this.backPressed)
   }
 

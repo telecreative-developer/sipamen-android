@@ -44,8 +44,8 @@ const Timeline = (props) => (
       keyExtractor={(item, index) => JSON.stringify(index)}
       renderItem={props.renderPosts} />
     <View>
-      <Fab active style={styles.fab} position="bottomRight" onPress={props.handleShowCreatePostModal}>
-        <Icon name='add' />
+      <Fab active style={styles.fab} position="bottomRight" onPress={props.handleNavigateToCreatePost}>
+        <Icon name='create' />
       </Fab>
     </View>
   </Container>
@@ -56,8 +56,7 @@ Timeline.propTypes = {
   refreshing: PropTypes.bool,
   renderPosts: PropTypes.func,
   handleRefresh: PropTypes.func,
-  handleShowCreatePostModal: PropTypes.func,
-  handleShowCommentModal: PropTypes.func
+  handleNavigateToCreatePost: PropTypes.func
 }
 
 const styles = StyleSheet.create({

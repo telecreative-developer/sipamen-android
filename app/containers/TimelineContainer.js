@@ -39,17 +39,14 @@ class TimelineContainer extends React.Component {
     return false
   }
 
-  handleShowCreatePostModal() {
-    this.setState({visibleModalCreatePost: true})
-  }
-
-  handleCloseCreatePostModal() {
-    this.setState({visibleModalCreatePost: false})
-  }
-
   handleNavigateToPost(item) {
     const { setNavigate } = this.props
     setNavigate('Post', item)
+  }
+
+  handleNavigateToCreatePost() {
+    const { setNavigate } = this.props
+    setNavigate('CreatePost')
   }
 
   async handleRefresh() {
@@ -59,87 +56,15 @@ class TimelineContainer extends React.Component {
     await this.setState({refreshing: false})
   }
 
-  handlePickImage() {
-    const options = {
-			quality: 1.0,
-			maxWidth: 500,
-			maxHeight: 500,
-			storageOptions: {
-				skipBackup: true
-			}
-		}
-
-		ImagePicker.launchImageLibrary(options, response => {
-			if (response.didCancel) {
-				this.setState({imageBase64: this.state.imageBase64 })
-			} else {
-				this.setState({
-					imageBase64: `data:image/png;base64,${response.data}`
-				})
-			}
-		})
-  }
-
-  handleOpenCamera() {
-    const options = {
-			quality: 1.0,
-			maxWidth: 500,
-			maxHeight: 500,
-			storageOptions: {
-				skipBackup: true
-			}
-		}
-
-		ImagePicker.launchCamera(options, response => {
-			if (response.didCancel) {
-				this.setState({imageBase64: this.state.imageBase64 })
-			} else {
-				this.setState({
-					imageBase64: `data:image/png;base64,${response.data}`
-				})
-			}
-		})
-  }
-
-  handleSendPost() {
-    const { sendPost, sendPostWithImage, sessionPersistance } = this.props
-    const { post, imageBase64 } = this.state
-    if(imageBase64 !== '') {
-      sendPostWithImage(imageBase64, {
-        post: post,
-        id: sessionPersistance.id
-      }, sessionPersistance.accessToken)
-    }else{
-      sendPost({
-        post: post,
-        id: sessionPersistance.id
-      }, sessionPersistance.accessToken)
-    }
-  }
-
-  handleSendComment() {
-    const { sendComment, sessionPersistance } = this.props
-    const { comment, post_id, userId } = this.state
-    if(comment !== '') {
-      sendComment(userId,
-        `${sessionPersistance.first_name} ${sessionPersistance.last_name}`, {
-        comment: comment,
-        post_id: post_id,
-        id: sessionPersistance.id,
-      }, sessionPersistance.accessToken)
-      this.setState({comment: ''})
-    }
-  }
-
   render() {
-    const { posts, comments, sessionPersistance, loading } = this.props
-    const { post, dataPost, comment, refreshing, visibleModalCreatePost, visibleModalComment } = this.state
+    const { posts } = this.props
+    const { post, refreshing } = this.state
     return (
       <Timeline
         posts={posts}
         refreshing={refreshing}
         handleRefresh={() => this.handleRefresh()}
-        handleShowCreatePostModal={() => this.handleShowCreatePostModal()}
+        handleNavigateToCreatePost={() => this.handleNavigateToCreatePost()}
         renderPosts={({item}) => (
           <TimelineCard
             avatar={item.users[0].avatar_url}
@@ -150,38 +75,19 @@ class TimelineContainer extends React.Component {
             createdAt={item.createdAt}
             handleNavigateToPost={() => this.handleNavigateToPost(item)} />
         )}>
-        <ModalCreatePost
-          visibleModalCreatePost={visibleModalCreatePost}
-          handleCloseModalCreatePost={() => this.handleCloseCreatePostModal()}
-          handlePickImage={() => this.handlePickImage()}
-          handleOpenCamera={() => this.handleOpenCamera()}
-          onChangePost={(post) => this.setState({post})}
-          handleSendPost={() => this.handleSendPost()}
-          postEmpty={post !== '' ? false : true}
-          loadingSendPost={loading.condition === true && loading.process_on === 'LOADING_SEND_POST' ? true : false}
-          name={`${sessionPersistance.first_name} ${sessionPersistance.last_name}`}
-          avatar={sessionPersistance.avatar_url}
-          forceOf={sessionPersistance.force_of}
-          post={post} />
       </Timeline>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  loading: state.loading,
   posts: state.posts,
-  sessionPersistance: state.sessionPersistance,
-  comments: state.comments
+  sessionPersistance: state.sessionPersistance
 })
 
 const mapDispatchToProps = dispatch => ({
   setNavigate: (link, data) => dispatch(setNavigate(link, data)),
-  fetchPosts: (accessToken) => dispatch(fetchPosts(accessToken)),
-  fetchComments: (idPost, accessToken) => dispatch(fetchComments(idPost, accessToken)),
-  sendComment: (userId, userName, data, accessToken) => dispatch(sendComment(userId, userName, data, accessToken)),
-  sendPost: (data, accessToken) => dispatch(sendPost(data, accessToken)),
-  sendPostWithImage: (image, data, accessToken) => dispatch(sendPostWithImage(image, data, accessToken))
+  fetchPosts: (accessToken) => dispatch(fetchPosts(accessToken))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineContainer)

@@ -8,7 +8,8 @@ import ChangePasswordContainer from './app/containers/ChangePasswordContainer'
 import ReportBugContainer from './app/containers/ReportBugContainer'
 import CalendarContainer from './app/containers/CalendarContainer'
 import PostContainer from './app/containers/PostContainer'
-import EventContainer from './app/containers/EventContainer';
+import EventContainer from './app/containers/EventContainer'
+import CreatePostContainer from './app/containers/CreatePostContainer'
 
 const AppNavigator = StackNavigator({
   Splash: {screen: SplashContainer},
@@ -19,6 +20,7 @@ const AppNavigator = StackNavigator({
   ReportBug: {screen: ReportBugContainer},
   Calendar: {screen: CalendarContainer},
   Post: {screen: PostContainer},
+  CreatePost: {screen: CreatePostContainer},
   Event: {screen: EventContainer}
 }, {
   headerMode: 'none'
