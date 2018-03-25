@@ -27,9 +27,7 @@ const TimelineCard = (props) => {
         </Right>
       </CardItem>
       <CardItem cardBody>
-        {props.image !== null && (
-          <Image source={{uri: props.image}} style={styles.image} />
-        )}
+        {props.children}
       </CardItem>
       <CardItem style={styles.cardItemCaption}>
         <Text style={styles.smallText}>{props.post}</Text>

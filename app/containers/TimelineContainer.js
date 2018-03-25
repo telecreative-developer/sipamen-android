@@ -1,12 +1,11 @@
 import React from 'react'
+import { BackHandler, Image, View } from 'react-native'
 import { connect } from 'react-redux'
-import ImagePicker from 'react-native-image-picker'
 import Timeline from '../components/Timeline'
-import { fetchPosts, sendPost, sendPostWithImage } from '../actions/posts'
-import { fetchComments, sendComment } from '../actions/comments'
-import ModalCreatePost from '../particles/modals/ModalCreatePost'
 import TimelineCard from '../particles/TimelineCard'
 import { setNavigate } from '../actions/processor'
+import Carousel from 'react-native-banner-carousel'
+import {fetchPosts} from "../actions/posts"
 
 class TimelineContainer extends React.Component {
   constructor() {
@@ -25,6 +24,25 @@ class TimelineContainer extends React.Component {
     await this.setState({refreshing: true})
     await fetchPosts(sessionPersistance.accessToken)
     await this.setState({refreshing: false})
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.backPressed)
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.backPressed)
+  }
+
+  backPressed = () => {
+    this.handleBack()
+    return true
+  }
+
+  async handleBack() {
+    const { navigation, setNavigate } = await this.props
+    await setNavigate()
+    await navigation.goBack()
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -56,12 +74,23 @@ class TimelineContainer extends React.Component {
     await this.setState({refreshing: false})
   }
 
+
+  renderImages(data, index) {
+    console.log(data)
+    return (
+      <View key={index}>
+        <Image style={{height: 270}} source={{uri: data.thumbnail_url}} />
+      </View>
+    )
+  }
+
   render() {
     const { posts } = this.props
-    const { post, refreshing } = this.state
+    const { refreshing } = this.state
     return (
       <Timeline
         posts={posts}
+        handleBack={() => this.handleBack()}
         refreshing={refreshing}
         handleRefresh={() => this.handleRefresh()}
         handleNavigateToCreatePost={() => this.handleNavigateToCreatePost()}
@@ -73,7 +102,17 @@ class TimelineContainer extends React.Component {
             image={item.image}
             post={item.post}
             createdAt={item.createdAt}
-            handleNavigateToPost={() => this.handleNavigateToPost(item)} />
+            handleNavigateToPost={() => this.handleNavigateToPost(item)}>
+            {item.thumbnails.length !== 0 && (
+              <Carousel
+                showsPageIndicator={item.thumbnails.length > 1 ? true : false}
+                autoplay={false}
+                loop={false}
+                index={0}>
+                {item.thumbnails.map((image, index) => this.renderImages(image, index))}
+              </Carousel>
+            )}
+          </TimelineCard>
         )}>
       </Timeline>
     )
@@ -86,8 +125,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setNavigate: (link, data) => dispatch(setNavigate(link, data)),
-  fetchPosts: (accessToken) => dispatch(fetchPosts(accessToken))
+  fetchPosts: (accessToken) => dispatch(fetchPosts(accessToken)),
+  setNavigate: (link, data) => dispatch(setNavigate(link, data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineContainer)

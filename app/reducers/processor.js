@@ -1,4 +1,4 @@
-import { SET_LOADING, SET_SUCCESS, SET_FAILED, ON_SET_NAVIGATE, ON_SET_ACTIVE_PAGE_HOME } from '../constants'
+import { SET_LOADING, SET_SUCCESS, SET_FAILED, ON_SET_NAVIGATE, ON_SET_ACTIVE_PAGE_HOME, SET_DOWNLOAD_FAILED, SET_DOWNLOAD_SUCCESS, SET_DOWNLOAD_LOADING } from '../constants'
 
 const initialStateActivePageHome = {
 	title: 'Home',
@@ -22,9 +22,34 @@ export const loading = (state = [], action) => {
 	}
 }
 
+export const loadingDownload = (state = [], action) => {
+	switch (action.type) {
+		case SET_DOWNLOAD_LOADING:
+			return {
+				index: action.index,
+				condition: action.condition,
+				process_on: action.process_on
+			}
+		default:
+			return state
+	}
+}
+
 export const success = (state = [], action) => {
 	switch (action.type) {
 		case SET_SUCCESS:
+			return {
+				condition: action.condition,
+				process_on: action.process_on
+			}
+		default:
+			return state
+	}
+}
+
+export const successDownload = (state = [], action) => {
+	switch (action.type) {
+		case SET_DOWNLOAD_SUCCESS:
 			return {
 				condition: action.condition,
 				process_on: action.process_on
@@ -38,6 +63,20 @@ export const failed = (state = [], action) => {
 	switch (action.type) {
 		case SET_FAILED:
 			return {
+				condition: action.condition,
+				process_on: action.process_on,
+				message: action.message
+			}
+		default:
+			return state
+	}
+}
+
+export const failedDownload = (state = [], action) => {
+	switch (action.type) {
+		case SET_DOWNLOAD_FAILED:
+			return {
+				index: action.index,
 				condition: action.condition,
 				process_on: action.process_on,
 				message: action.message

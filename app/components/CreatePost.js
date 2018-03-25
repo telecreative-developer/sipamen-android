@@ -1,11 +1,10 @@
 import React from 'react'
-import { StyleSheet, Dimensions, Image } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { Container, Header, Spinner, Text, Button, Icon, Left, Input, Body, Title, Right, Content, ListItem, Thumbnail, Item, Footer, FooterTab } from 'native-base'
 import PropTypes from 'prop-types'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import ThemeContainer from '../particles/ThemeContainer'
 
-const { height, width } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
 const CreatePost = (props) => (
   <Container style={styles.container}>
@@ -60,22 +59,32 @@ const CreatePost = (props) => (
           multiline={true}
           style={styles.inputStatus} />
       </Item>
+      {props.children}
     </Content>
     <Footer>
-      <FooterTab>
-        <Button onPress={props.handlePickImage}>
-          <Icon name='images' size={35} style={{color: '#2ecc71'}} />
-          <Text>Image</Text>
-        </Button>
-        <Button onPress={props.handleOpenCamera}>
-          <Icon name='camera' size={35} style={{color: '#2ecc71'}} />
-          <Text>Camera</Text>
-        </Button>
-        <Button>
-          <MaterialIcons name='gif' size={25} style={{color: '#3498db'}} />
-          <Text>GIF</Text>
-        </Button>
-      </FooterTab>
+      {props.countImages >= 5 ? (
+        <FooterTab>
+          <Button>
+            <Icon name='images' size={35} style={{color: '#999999'}} />
+            <Text style={{color: '#999999'}}>Image</Text>
+          </Button>
+          <Button>
+            <Icon name='camera' size={35} style={{color: '#999999'}} />
+            <Text style={{color: '#999999'}}>Camera</Text>
+          </Button>
+        </FooterTab>
+      ) : (
+        <FooterTab>
+          <Button onPress={props.handlePickImage}>
+            <Icon name='images' size={35} style={{color: '#2ecc71'}} />
+            <Text>Image</Text>
+          </Button>
+          <Button onPress={props.handleOpenCamera}>
+            <Icon name='camera' size={35} style={{color: '#2ecc71'}} />
+            <Text>Camera</Text>
+          </Button>
+        </FooterTab>
+      )}
     </Footer>
   </Container>
 )
@@ -90,7 +99,8 @@ CreatePost.propTypes = {
   handleOpenCamera: PropTypes.func,
   onChangePost: PropTypes.func,
   loadingSendPost: PropTypes.bool,
-  handleSendPost: PropTypes.func
+  handleSendPost: PropTypes.func,
+  countImages: PropTypes.number
 }
 
 const styles = StyleSheet.create({

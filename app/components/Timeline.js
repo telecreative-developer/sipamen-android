@@ -15,6 +15,7 @@ import {
   Body,
   Right,
   Header,
+  Title,
   Card,
   CardItem,
   Thumbnail,
@@ -30,11 +31,23 @@ import {
 import Modal from 'react-native-modal'
 import moment from 'moment'
 import PropTypes from 'prop-types'
+import ThemeContainer from '../particles/ThemeContainer'
 
 const { height, width } = Dimensions.get("window")
 
 const Timeline = (props) => (
   <Container style={styles.container}>
+    <Header>
+      <Left>
+        <Button transparent onPress={props.handleBack}>
+          <Icon name='arrow-back' />
+        </Button>
+      </Left>
+      <Body>
+        <Title>Kegiatan</Title>
+      </Body>
+      <Right />
+    </Header>
     {props.children}
     <FlatList
       showsVerticalScrollIndicator={false}
@@ -118,4 +131,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Timeline
+export default ThemeContainer(Timeline)

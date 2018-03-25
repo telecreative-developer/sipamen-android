@@ -1,18 +1,22 @@
 import React from 'react'
-import { BackHandler } from 'react-native'
+import { BackHandler, ImageBackground, Dimensions } from 'react-native'
+import { Icon, Body, Header, Button, Right } from 'native-base'
 import CreatePost from '../components/CreatePost'
 import { sendPost, sendPostWithImage } from '../actions/posts'
 import { connect } from 'react-redux'
 import { setNavigate } from '../actions/processor'
-import ImagePicker from 'react-native-image-picker'
+import ImagePicker from 'react-native-image-crop-picker'
+import {addImage, cancelImage} from "../actions/images"
+import Carousel from 'react-native-banner-carousel'
+
+const { width } = Dimensions.get('window')
 
 class CreatePostContainer extends React.PureComponent {
   constructor() {
     super()
 
     this.state = {
-      post: '',
-      imageBase64: ''
+      post: ''
     }
   }
 
@@ -35,12 +39,13 @@ class CreatePostContainer extends React.PureComponent {
   }
 
   handleSendPost() {
-    const { sendPost, sendPostWithImage, sessionPersistance } = this.props
-    const { post, imageBase64 } = this.state
-    if(imageBase64 !== '') {
-      sendPostWithImage(imageBase64, {
+    const { sendPost, sendPostWithImage, sessionPersistance, dataImages } = this.props
+    const { post } = this.state
+    if(dataImages.length !== 0) {
+      sendPostWithImage({
         post: post,
-        id: sessionPersistance.id
+        id: sessionPersistance.id,
+        dataImages: dataImages
       }, sessionPersistance.accessToken)
     }else{
       sendPost({
@@ -51,49 +56,49 @@ class CreatePostContainer extends React.PureComponent {
   }
 
   handlePickImage() {
-    const options = {
-			quality: 1.0,
-			maxWidth: 500,
-			maxHeight: 500,
-			storageOptions: {
-				skipBackup: true
-			}
-		}
-
-		ImagePicker.launchImageLibrary(options, response => {
-			if (response.didCancel) {
-				this.setState({imageBase64: this.state.imageBase64 })
-			} else {
-				this.setState({
-					imageBase64: `data:image/png;base64,${response.data}`
-				})
-			}
-		})
+    const { addImage } = this.props
+		ImagePicker.openPicker({
+      width: width / 3,
+      height: width / 3,
+      multiple: true,
+      mediaType: 'photo',
+      includeBase64: true
+    }).then(data => {
+      addImage(`data:${data[0].mime};base64,${data[0].data}`)
+    })
   }
 
   handleOpenCamera() {
-    const options = {
-			quality: 1.0,
-			maxWidth: 500,
-			maxHeight: 500,
-			storageOptions: {
-				skipBackup: true
-			}
-		}
+    const { addImage } = this.props
+    ImagePicker.openCamera({
+      width: width / 3,
+      height: width / 3,
+      multiple: true,
+      mediaType: 'photo',
+      includeBase64: true
+    }).then(data => {
+      addImage(`data:${data[0].mime};base64,${data[0].data}`)
+    })
+  }
 
-		ImagePicker.launchCamera(options, response => {
-			if (response.didCancel) {
-				this.setState({imageBase64: this.state.imageBase64 })
-			} else {
-				this.setState({
-					imageBase64: `data:image/png;base64,${response.data}`
-				})
-			}
-		})
+  renderImages(data, index) {
+    const { cancelImage } = this.props
+    return (
+      <ImageBackground style={{height: 270}} source={{uri: data.image}} key={index}>
+        <Header style={{backgroundColor: 'transparent'}} hasTabs>
+          <Body />
+          <Right>
+            <Button transparent onPress={() => cancelImage(data)}>
+              <Icon name='close' style={{color: '#FFFFFF'}} />
+            </Button>
+          </Right>
+        </Header>
+      </ImageBackground>
+    )
   }
 
   render() {
-    const { sessionPersistance, loading } = this.props
+    const { sessionPersistance, loading, dataImages } = this.props
     const { post } = this.state
     return (
       <CreatePost
@@ -107,20 +112,34 @@ class CreatePostContainer extends React.PureComponent {
         name={`${sessionPersistance.first_name} ${sessionPersistance.last_name}`}
         avatar={sessionPersistance.avatar_url}
         forceOf={sessionPersistance.force_of}
-        post={post}  />
+        post={post}
+        countImages={dataImages.length}>
+        {dataImages.length !== 0 && (
+          <Carousel
+            showsPageIndicator={dataImages.length > 1 ? true : false}
+            autoplay={false}
+            loop={false}
+            index={0}>
+            {dataImages.map((image, index) => this.renderImages(image, index))}
+          </Carousel>
+        )}
+      </CreatePost>
     )
   }
 }
 
 const mapStateToProps = state => ({
   sessionPersistance: state.sessionPersistance,
-  loading: state.loading
+  loading: state.loading,
+  dataImages: state.dataImages
 })
 
 const mapDispatchToProps = dispatch => ({
   setNavigate: (link, data) => dispatch(setNavigate(link, data)),
+  addImage: (image) => dispatch(addImage(image)),
+  cancelImage: (image) => dispatch(cancelImage(image)),
   sendPost: (data, accessToken) => dispatch(sendPost(data, accessToken)),
-  sendPostWithImage: (image, data, accessToken) => dispatch(sendPostWithImage(image, data, accessToken))
+  sendPostWithImage: (data, accessToken) => dispatch(sendPostWithImage(data, accessToken))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePostContainer)

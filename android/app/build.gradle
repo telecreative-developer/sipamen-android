@@ -107,6 +107,8 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
 
+        vectorDrawables.useSupportLibrary = true
+
         manifestPlaceholders = [onesignal_app_id: "7a686478-82f7-44c6-b48c-ecaf5c11feb5",
                                 onesignal_google_project_number: "151949023684"]
     }
@@ -140,6 +142,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-crop-picker')
+    compile project(':react-native-splash-screen')
+    compile project(':react-native-pdf')
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-vector-icons')
     compile project(':react-native-onesignal')
     compile project(':react-native-mail')

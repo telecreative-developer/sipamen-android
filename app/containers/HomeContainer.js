@@ -12,29 +12,35 @@ const bannerImages = [
 
 const dataMenus = [
   {
-    key: 'Tujuan Pendidikan',
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635388/tujuan_bsowjk.png'
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635388/tujuan_bsowjk.png',
+    title: 'Standar Kompetensi Pendidikan',
+    type: 'standar-kompetensi'
   },
   {
-    key: 'Profil Lulusan',
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/profil_rq80u1.png'
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/profil_rq80u1.png',
+    title: 'Data Nilai',
+    type: 'data-nilai'
   },
   {
-    key: 'Tema Pendidikan',
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/tema_emveww.png'
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/profil_rq80u1.png',
+    title: 'Data Serdik',
+    type: 'data-serdik'
   },
   {
-    key: 'Lama Pendidikan',
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/lama_b28aym.png'
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/tema_emveww.png',
+    title: 'Kegiatan',
+    type: 'kegiatan'
   },
   {
-    key: 'Metode Pembelajaran',
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/metode_sr1cbn.png'
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/tema_emveww.png',
+    title: 'Hanbook',
+    type: 'handbook'
   },
   {
-    key: 'Kompetensi Lulusan',
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/lulusan_wbdoej.png'
-  },
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/tema_emveww.png',
+    title: 'POK Uji',
+    type: 'pok-uji'
+  }
 ]
 
 const { height, width } = Dimensions.get('window')
@@ -45,20 +51,25 @@ const bannerHeight = 270
 
 class HomeContainer extends React.Component {
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if(nextProps !== this.props) {
-      return true
+  async handleNavigateTo(item) {
+    const { setNavigate, dataStandarKompetensi, dataSerdik, dataHandbook, sessionPersistance } = this.props
+    if(item.type === 'standar-kompetensi') {
+      setNavigate('DocumentViewer', dataStandarKompetensi)
+    }else if(item.type === 'data-nilai') {
+      setNavigate('Score', item)
+    }else if(item.type === 'data-serdik') {
+      setNavigate('DocumentList', {documentTitle: 'Data Serdik', documentData: dataSerdik})
+    }else if(item.type === 'kegiatan') {
+      setNavigate('Timeline', item)
+    }else if(item.type === 'handbook') {
+      setNavigate('DocumentList', {documentTitle: 'Handbook', documentData: dataHandbook, download: true})
+    }else if(item.type === 'pok-uji') {
+      setNavigate('POKUji')
     }
-
-    if(nextState !== this.state) {
-      return true
-    }
-
-    return false
   }
 
   handleNavigateScore() {
-    this.props.setNavigate('Calendar')
+    this.props.setNavigate('ProfileSipamen')
   }
 
   handleNavigateCalender() {
@@ -66,16 +77,15 @@ class HomeContainer extends React.Component {
   }
 
   renderMenus = ({ item, index }) => {
-    const { setNavigate } = this.props
     if (item.empty === true) {
       return <View style={[styles.item, styles.itemInvisible]} />
     }
 
     return (
-      <TouchableNativeFeedback onPress={() => setNavigate('FullPost', item)}>
+      <TouchableNativeFeedback onPress={() => this.handleNavigateTo(item)}>
         <View style={styles.item}>
           <Image source={{ uri: item.icon }} style={styles.menuBoxIcon} />
-          <Text style={styles.itemText}>{item.key}</Text>
+          <Text style={styles.itemText}>{item.title}</Text>
         </View>
       </TouchableNativeFeedback>
     )
@@ -100,6 +110,13 @@ class HomeContainer extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  sessionPersistance: state.sessionPersistance,
+  dataStandarKompetensi: state.dataStandarKompetensi,
+  dataSerdik: state.dataSerdik,
+  dataHandbook: state.dataHandbook
+})
 
 const mapDispatchToProps = dispatch => ({
   setNavigate: (link, data) => dispatch(setNavigate(link, data))
@@ -139,4 +156,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null, mapDispatchToProps)(HomeContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)

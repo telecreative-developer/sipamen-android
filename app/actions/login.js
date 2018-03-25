@@ -1,8 +1,11 @@
 import { AsyncStorage } from 'react-native'
 import { setLoading, setFailed, setSuccess } from './processor'
 import { SAVE_SESSION_PERSISTANCE } from '../constants'
-import { initialOneSignal } from './notifications';
+import { initialOneSignal } from './notifications'
 import { API_SERVER } from '../env'
+import { fetchDocuments } from './documents'
+import { getBearerToken } from './twitter'
+import { fetchScores } from './scores'
 
 export const login = (email, password, onesignalId) => {
 	return async dispatch => {
@@ -22,6 +25,11 @@ export const login = (email, password, onesignalId) => {
 				await dispatch(setLoading(false, 'LOADING_PROCESS_LOGIN'))
 			} else {
 				await dispatch(fetchUserWithEmail(email, password, data.accessToken, onesignalId))
+				await dispatch(fetchDocuments('standar-kompetensi', data.accessToken))
+				await dispatch(fetchDocuments('data-serdik', data.accessToken))
+				await dispatch(fetchDocuments('handbook', data.accessToken))
+				await dispatch(getBearerToken())
+				await dispatch(fetchScores(data.accessToken))
 				await dispatch(setSuccess(true, 'SUCCESS_PROCESS_LOGIN'))
 				await dispatch(setLoading(false, 'LOADING_PROCESS_LOGIN'))
 			}

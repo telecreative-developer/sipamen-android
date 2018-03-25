@@ -7,7 +7,7 @@ import ComponentPage from '../components/ComponentPage'
 import OneSignal from 'react-native-onesignal'
 import { setNavigate, setActivePageHome } from '../actions/processor'
 import HomeContainer from './HomeContainer'
-import TimelineContainer from './TimelineContainer'
+import TwitterContainer from './TwitterContainer'
 import NotificationContainer from './NotificationContainer'
 import ProfileContainer from './ProfileContainer'
 import logo from '../assets/images/logo-header-01.png'
@@ -54,6 +54,16 @@ class ComponentContainer extends React.Component {
     }else if(navigate.link === 'Event') {
       navigation.navigate(navigate.link, navigate.data)
     }else if(navigate.link === 'CreatePost') {
+      navigation.navigate(navigate.link, navigate.data)
+    }else if(navigate.link === 'DocumentViewer') {
+      navigation.navigate(navigate.link, navigate.data)
+    }else if(navigate.link === 'DocumentList') {
+      navigation.navigate(navigate.link, navigate.data)
+    }else if(navigate.link === 'Timeline') {
+      navigation.navigate(navigate.link, navigate.data)
+    }else if(navigate.link === 'POKUji') {
+      navigation.navigate(navigate.link, navigate.data)
+    }else if(navigate.link === 'Score') {
       navigation.navigate(navigate.link, navigate.data)
     }
   }
@@ -124,7 +134,7 @@ class ComponentContainer extends React.Component {
 			activePageThird: false,
 			activePageFourth: false,
 			activePageFifth: false,
-			title: 'Enterpreneur'
+			title: 'Tweet'
 		})
 	}
 
@@ -207,7 +217,7 @@ class ComponentContainer extends React.Component {
   renderContent() {
     const { active } = this.props.activePageHome
     if (active === 2) {
-      return <TimelineContainer />
+      return <TwitterContainer />
     } else if (active === 3) {
       return <NotificationContainer />
     } else if (active === 4) {

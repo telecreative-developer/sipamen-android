@@ -10,6 +10,11 @@ import CalendarContainer from './app/containers/CalendarContainer'
 import PostContainer from './app/containers/PostContainer'
 import EventContainer from './app/containers/EventContainer'
 import CreatePostContainer from './app/containers/CreatePostContainer'
+import DocumentListContainer from './app/containers/DocumentListContainer'
+import DocumentViewerContainer from './app/containers/DocumentViewerContainer'
+import TimelineContainer from './app/containers/TimelineContainer'
+import POKUjiContainer from './app/containers/POKUjiContainer'
+import ScoreContainer from "./app/containers/ScoreContainer";
 
 const AppNavigator = StackNavigator({
   Splash: {screen: SplashContainer},
@@ -17,11 +22,16 @@ const AppNavigator = StackNavigator({
   Login: {screen: LoginContainer},
   EditProfile: {screen: EditProfileContainer},
   ChangePassword: {screen: ChangePasswordContainer},
+  Timeline: {screen: TimelineContainer},
   ReportBug: {screen: ReportBugContainer},
   Calendar: {screen: CalendarContainer},
   Post: {screen: PostContainer},
   CreatePost: {screen: CreatePostContainer},
-  Event: {screen: EventContainer}
+  Event: {screen: EventContainer},
+  DocumentList: {screen: DocumentListContainer},
+  DocumentViewer: {screen: DocumentViewerContainer},
+  POKUji: {screen: POKUjiContainer},
+  Score: {screen: ScoreContainer}
 }, {
   headerMode: 'none'
 })

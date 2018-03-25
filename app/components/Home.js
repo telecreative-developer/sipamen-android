@@ -36,8 +36,8 @@ const Home = (props) => (
       <Grid style={styles.grid}>
         <Col style={styles.leftCol}>
           <Button transparent onPress={props.navigateScore} style={styles.buttonDouble}>
-            <Icon name='md-clipboard' style={styles.icon} />
-            <Text style={styles.topButtonText} uppercase={false}>Nilai Akademisi</Text>
+            <Icon name='md-person' style={styles.icon} />
+            <Text style={styles.topButtonText} uppercase={false}>Profile</Text>
           </Button>
         </Col>
         <Col style={styles.rightCol}>

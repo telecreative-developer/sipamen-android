@@ -27,6 +27,7 @@ import {
 import { NavigationActions } from 'react-navigation'
 import ThemeContainer from '../particles/ThemeContainer'
 import Modal from 'react-native-modal'
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 import logo from '../assets/images/logo-header-01.png'
 
 const { height, width } = Dimensions.get("window")
@@ -104,8 +105,8 @@ const ComponentPage = (props) => (
           vertical
           active={props.activePageSecond}
           onPress={props.handleActivePageSecond}>
-          <Icon name='paper' style={{color: props.activePageSecond ? '#106538' : '#999999', fontSize: props.activePageSecond ? 27 : 25}} />
-          <Text uppercase={false} style={{color: props.activePageSecond ? '#106538' : '#999999', fontSize: props.activePageSecond ? 11 : 9}}>Enterpreneur</Text>
+          <EntypoIcon name='twitter' style={{color: props.activePageSecond ? '#106538' : '#999999', fontSize: props.activePageSecond ? 27 : 25}} />
+          <Text uppercase={false} style={{color: props.activePageSecond ? '#106538' : '#999999', fontSize: props.activePageSecond ? 11 : 9}}>Tweet</Text>
         </Button>
         <Button
           vertical
