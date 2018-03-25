@@ -69,7 +69,7 @@ class HomeContainer extends React.Component {
   }
 
   handleNavigateScore() {
-    this.props.setNavigate('ProfileSipamen')
+    this.props.setNavigate('Calendar')
   }
 
   handleNavigateCalender() {
