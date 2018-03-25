@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import org.wonday.pdf.RCTPdfView;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -32,7 +31,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new PickerPackage(),
-            new SplashScreenReactPackage(),
             new RCTPdfView(),
             new RNFetchBlobPackage(),
             new VectorIconsPackage(),
