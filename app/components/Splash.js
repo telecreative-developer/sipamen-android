@@ -9,7 +9,7 @@ const { width, height } = Dimensions.get('window')
 
 const Splash = (props) => (
   <Container style={styles.splash}>
-    <Image source={logo} style={{width: 200, height: 200}} />
+    <Image source={logo} style={{width: 300, height: 300}} />
   </Container>
 )
 

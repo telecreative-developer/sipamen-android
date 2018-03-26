@@ -17,7 +17,7 @@ const dataMenus = [
     type: 'standar-kompetensi'
   },
   {
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/profil_rq80u1.png',
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/lama_b28aym.png',
     title: 'Data Nilai',
     type: 'data-nilai'
   },
@@ -27,18 +27,18 @@ const dataMenus = [
     type: 'data-serdik'
   },
   {
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/tema_emveww.png',
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/metode_sr1cbn.png',
     title: 'Kegiatan',
     type: 'kegiatan'
   },
   {
     icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/tema_emveww.png',
-    title: 'Hanbook',
+    title: 'Handbook',
     type: 'handbook'
   },
   {
-    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/tema_emveww.png',
-    title: 'POK Uji',
+    icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/lulusan_wbdoej.png',
+    title: 'Pokok Ujian',
     type: 'pok-uji'
   }
 ]
@@ -68,11 +68,11 @@ class HomeContainer extends React.Component {
     }
   }
 
-  handleNavigateScore() {
-    this.props.setNavigate('Calendar')
+  handleNavigateProfile() {
+    this.props.setNavigate('DocumentViewer', {document_title: 'Profil Sipamen', document_url: 'https://res.cloudinary.com/nandonrp/image/upload/v1522006150/ProfileSipamen_rgf0gk.pdf'})
   }
 
-  handleNavigateCalender() {
+  handleNavigateCalendar() {
     this.props.setNavigate('Calendar')
   }
 
@@ -103,8 +103,8 @@ class HomeContainer extends React.Component {
     return (
       <Home
         banners={bannerImages.map((image, index) => this.renderBanners(image, index))}
-        navigateScore={() => this.handleNavigateScore()}
-        navigateCalender={() => this.handleNavigateCalender()}
+        navigateProfile={() => this.handleNavigateProfile()}
+        navigateCalendar={() => this.handleNavigateCalendar()}
         dataMenus={dataMenus}
         renderMenus={this.renderMenus} />
     )
