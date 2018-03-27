@@ -39,6 +39,7 @@ class DocumentViewerContainer extends React.PureComponent {
     return (
       <DocumentViewer
         scale={scale}
+        handleBack={() => this.handleBack()}
         documentTitle={params.document_title}
         fileSource={params.document_url}
         zoomIn={() => this.setState({scale: scale+0.1})}
