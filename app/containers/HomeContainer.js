@@ -76,7 +76,7 @@ class HomeContainer extends React.Component {
     this.props.setNavigate('Calendar')
   }
 
-  renderMenus = ({ item, index }) => {
+  renderMenus = ({ item }) => {
     if (item.empty === true) {
       return <View style={[styles.item, styles.itemInvisible]} />
     }

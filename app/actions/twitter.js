@@ -6,7 +6,7 @@ export const fetchTweets = (accessToken) => {
 	return async dispatch => {
     await dispatch(setLoading(false, 'LOADING_FETCH_TWEETS'))
     try {
-      const response = await fetch(`${TWITTER_SEARCH_TWEETS}?screen_name=NTMCLantasPolri&include_rts=true`, {
+      const response = await fetch(`${TWITTER_SEARCH_TWEETS}?screen_name=detikcom&include_rts=true`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,
