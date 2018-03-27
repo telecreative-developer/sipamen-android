@@ -91,6 +91,7 @@ export const sendPost = (data, accessToken) => {
 				},
 				body: JSON.stringify(data)
 			})
+			await dispatch(fetchPosts(accessToken))
 			await dispatch(setSuccess(true, 'SUCCESS_SEND_POST'))
 			await dispatch(setLoading(false, 'LOADING_SEND_POST'))
 		} catch (e) {
@@ -138,6 +139,7 @@ export const sendPostWithImage = (item, accessToken) => {
           })
         })
 			})
+      await dispatch(fetchPosts(accessToken))
 			await dispatch(setSuccess(true, 'SUCCESS_SEND_POST'))
 			await dispatch(setLoading(false, 'LOADING_SEND_POST'))
 		} catch (e) {

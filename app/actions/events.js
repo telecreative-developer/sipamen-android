@@ -20,6 +20,7 @@ export const fetchEvents = (accessToken) => {
 			await dispatch(setSuccess(true, 'SUCCESS_FETCH_EVENTS'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_EVENTS'))
 		} catch (e) {
+			console.log(e)
 			dispatch(setFailed(true, 'FAILED_FETCH_EVENTS', e))
 			dispatch(setLoading(false, 'LOADING_FETCH_EVENTS'))
 		}

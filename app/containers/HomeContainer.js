@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Dimensions, TouchableNativeFeedback, View, Text, StyleSheet } from 'react-native'
+import { Image, Dimensions, Alert, TouchableNativeFeedback, View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { setNavigate } from '../actions/processor'
 import Home from '../components/Home'
@@ -38,7 +38,7 @@ const dataMenus = [
   },
   {
     icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635389/lulusan_wbdoej.png',
-    title: 'Pokok Ujian',
+    title: 'Kelompok Ujian',
     type: 'pok-uji'
   }
 ]
@@ -64,7 +64,8 @@ class HomeContainer extends React.Component {
     }else if(item.type === 'handbook') {
       setNavigate('DocumentList', {documentTitle: 'Handbook', documentData: dataHandbook, download: true})
     }else if(item.type === 'pok-uji') {
-      setNavigate('POKUji')
+      // setNavigate('POKUji')
+      Alert.alert('Pemberitahuan', 'Kelompok ujian belum bisa ditampilkan karena ujian belum dimulai.')
     }
   }
 

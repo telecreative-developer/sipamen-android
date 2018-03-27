@@ -1,5 +1,5 @@
 import React from 'react'
-import { BackHandler, ImageBackground, Dimensions } from 'react-native'
+import {BackHandler, ImageBackground, Dimensions, ToastAndroid} from 'react-native'
 import { Icon, Body, Header, Button, Right } from 'native-base'
 import CreatePost from '../components/CreatePost'
 import { sendPost, sendPostWithImage } from '../actions/posts'
@@ -11,12 +11,32 @@ import Carousel from 'react-native-banner-carousel'
 
 const { width } = Dimensions.get('window')
 
-class CreatePostContainer extends React.PureComponent {
+class CreatePostContainer extends React.Component {
   constructor() {
     super()
 
     this.state = {
       post: ''
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps !== this.props) {
+      return true
+    }
+
+    if(nextState !== this.state) {
+      return true
+    }
+
+    return false
+  }
+
+  componentWillUpdate(nextProps) {
+    const { success } = nextProps
+    if (success.condition === true && success.process_on === 'SUCCESS_SEND_POST') {
+      this.handleBack()
+      ToastAndroid.show('Kegiatan berhasil diupdate', ToastAndroid.SHORT)
     }
   }
 
@@ -131,6 +151,7 @@ class CreatePostContainer extends React.PureComponent {
 const mapStateToProps = state => ({
   sessionPersistance: state.sessionPersistance,
   loading: state.loading,
+  success: state.success,
   dataImages: state.dataImages
 })
 

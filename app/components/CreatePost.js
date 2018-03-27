@@ -3,6 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 import { Container, Header, Spinner, Text, Button, Icon, Left, Input, Body, Title, Right, Content, ListItem, Thumbnail, Item, Footer, FooterTab } from 'native-base'
 import PropTypes from 'prop-types'
 import ThemeContainer from '../particles/ThemeContainer'
+import defaultAvatar from '../assets/images/default-avatar.jpg'
 
 const { height } = Dimensions.get('window')
 
