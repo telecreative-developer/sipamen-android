@@ -32,7 +32,7 @@ const stdev = (arr) => {
   return Math.round(stddev*100)/100;
 };
 
-export const fetchScores = (accessToken) => {
+export const fetchScores = (user_id, accessToken) => {
 	return async dispatch => {
     await dispatch(setLoading(false, 'LOADING_FETCH_SCORES'))
     try {
@@ -45,7 +45,7 @@ export const fetchScores = (accessToken) => {
         }
       })
       const data = await response.json()
-      const responseTeam = await fetch(`${API_SERVER}/teams?id=1`, {
+      const responseTeam = await fetch(`${API_SERVER}/teams?id=${user_id}`, {
         method: 'GET',
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export const fetchScores = (accessToken) => {
         }
       })
       const dataTeams = await responseTeams.json()
-      let nak = await data.data.filter(d => d.id === 1).map(d => (parseFloat(d.nilai_murni_narasumber_1_nr1) + parseFloat(d.nilai_murni_narasumber_2_nr2)) / parseFloat(2))
+      let nak = await data.data.filter(d => d.id === user_id).map(d => (parseFloat(d.nilai_murni_narasumber_1_nr1) + parseFloat(d.nilai_murni_narasumber_2_nr2)) / parseFloat(2))
       let nrk = await data.data.filter(d => d.team === dataTeam.data[0].team).map(d => (parseFloat(d.nilai_murni_narasumber_1_nr1) + parseFloat(d.nilai_murni_narasumber_2_nr2)) / 2).reduce((a, b) => parseFloat(a)+parseFloat(b) / dataTeams.data.length, 0).toFixed(3)
       let pks = await parseFloat(parseFloat(nak) - parseFloat(nrk)).toFixed(3)
       let spk = await stdev(data.data.filter(d => d.team === dataTeam.data[0].team).map(d => (parseFloat(d.nilai_murni_narasumber_1_nr1) + parseFloat(d.nilai_murni_narasumber_2_nr2)) / parseFloat(2)))
@@ -75,6 +75,7 @@ export const fetchScores = (accessToken) => {
       await dispatch(setSuccess(true, 'SUCCESS_FETCH_SCORES'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_SCORES'))
     }catch(e) {
+      console.log(e)
       dispatch(setFailed(true, 'SUCCESS_FETCH_SCORES', e))
 			dispatch(setLoading(false, 'LOADING_FETCH_SCORES'))
     }

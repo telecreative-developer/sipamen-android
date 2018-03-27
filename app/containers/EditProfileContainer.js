@@ -16,7 +16,7 @@ class EditProfileContainer extends React.Component {
       avatarBase64: '',
       firstName: '',
       lastName: '',
-      gender: '',
+      gender: 1,
       bop: '',
       bod: '',
       forceOf: '',

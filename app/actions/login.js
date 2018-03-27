@@ -29,11 +29,11 @@ export const login = (email, password, onesignalId) => {
 				await dispatch(fetchDocuments('data-serdik', data.accessToken))
 				await dispatch(fetchDocuments('handbook', data.accessToken))
 				await dispatch(getBearerToken())
-				await dispatch(fetchScores(data.accessToken))
 				await dispatch(setSuccess(true, 'SUCCESS_PROCESS_LOGIN'))
 				await dispatch(setLoading(false, 'LOADING_PROCESS_LOGIN'))
 			}
 		} catch (e) {
+			console.log(e)
 			dispatch(setFailed(true, 'FAILED_PROCESS_LOGIN', e))
 			dispatch(setLoading(false, 'LOADING_PROCESS_LOGIN'))
 			dispatch(setFailed(false, 'FAILED_PROCESS_LOGIN'))
@@ -54,13 +54,19 @@ const fetchUserWithEmail = (email, password, accessToken, onesignalId) => {
 				}
 			})
 			const data = await response.json()
-			if(onesignalId !== undefined) {
-				dispatch(initialOneSignal({onesignal_id: onesignalId, id: data.data[0].id}, accessToken))
+    	if (data.data[0].verified === 0) {
+        await dispatch(setFailed(true, 'FAILED_PROCESS_LOGIN', 'Akun Anda dalam proses pengecekan admin, silahkan tunggu sampai admin mengkonfirmasi akun Anda.'))
+        await dispatch(setLoading(false, 'LOADING_PROCESS_LOGIN'))
+      }else{
+        if(onesignalId !== undefined) {
+          dispatch(initialOneSignal({onesignal_id: onesignalId, id: data.data[0].id}, accessToken))
+        }
+        await dispatch(fetchScores(data.data[0].id, accessToken))
+        await dispatch(saveSession({ email, password, accessToken }))
+        await dispatch(saveSessionPersistance({...data.data[0], accessToken}))
+        await dispatch(setSuccess(true, 'SUCCESS_FETCH_USER_WITH_EMAIL'))
+        await dispatch(setLoading(false, 'LOADING_FETCH_USER_WITH_EMAIL'))
 			}
-			await dispatch(saveSession({ email, password, accessToken }))
-			await dispatch(saveSessionPersistance({...data.data[0], accessToken}))
-			await dispatch(setSuccess(true, 'SUCCESS_FETCH_USER_WITH_EMAIL'))
-			await dispatch(setLoading(false, 'LOADING_FETCH_USER_WITH_EMAIL'))
 		} catch (e) {
 			dispatch(setFailed(true, 'FAILED_FETCH_USER_WITH_EMAIL', e))
 			dispatch(setLoading(false, 'LOADING_FETCH_USER_WITH_EMAIL'))

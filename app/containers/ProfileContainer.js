@@ -3,7 +3,6 @@ import Profile from '../components/Profile'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { fetchMyPosts } from '../actions/posts'
-import TimelineCard from '../particles/TimelineCard'
 import { setNavigate } from '../actions/processor'
 
 class ProfileContainer extends React.PureComponent {
@@ -23,7 +22,7 @@ class ProfileContainer extends React.PureComponent {
   }
 
   handleNavigateToPost(item) {
-    const { sessionPersistance, setNavigate } = this.props
+    const { setNavigate } = this.props
     setNavigate('Post', item)
   }
 
@@ -35,7 +34,7 @@ class ProfileContainer extends React.PureComponent {
   }
 
   render() {
-    const { myPosts, sessionPersistance } = this.props
+    const { myPosts, sessionPersistance, scores } = this.props
     const { refreshing } = this.state
     return (
       <Profile
@@ -48,16 +47,8 @@ class ProfileContainer extends React.PureComponent {
         gender={sessionPersistance.gender}
         birthOfPlace={sessionPersistance.bop}
         birthOfDate={moment(sessionPersistance.bod).format('LL')}
-        renderPosts={({item}) => (
-          <TimelineCard
-            avatar={item.users[0].avatar_url}
-            name={`${item.users[0].first_name} ${item.users[0].last_name}`}
-            info={`SESPIMMEN ${item.users[0].force_of}`}
-            image={item.image}
-            post={item.post}
-            createdAt={item.createdAt}
-            handleNavigateToPost={() => this.handleNavigateToPost(item)} />
-        )}>
+        nrk={scores.nrk}
+        nad={scores.nad}>
       </Profile>
     )
   }
@@ -65,6 +56,7 @@ class ProfileContainer extends React.PureComponent {
 
 const mapStateToProps = state => ({
   myPosts: state.myPosts,
+  scores: state.scores,
   sessionPersistance: state.sessionPersistance
 })
 

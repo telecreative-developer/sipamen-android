@@ -32,7 +32,7 @@ class LoginContainer extends React.Component {
     return false
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps) {
     const { loading, success, failed, navigation } = nextProps
     if (
       loading.condition === false &&
@@ -56,7 +56,7 @@ class LoginContainer extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { failed, setFailed } = prevProps
     if(failed.condition === true) {
       setFailed(false, 'FAILED_FETCH_USER_WITH_EMAIL', '')
@@ -113,13 +113,15 @@ class LoginContainer extends React.Component {
   }
   
   render() {
+    const { navigate } = this.props.navigation
     return (
       <Login
         valueEmail={this.state.email}
         valuePassword={this.state.password}
         onChangeEmail={(email) => this.setState({email})}
         onChangePassword={(password) => this.setState({password})}
-        renderButtons={this.renderButtons()} />
+        renderButtons={this.renderButtons()}
+        navigateToRegister={() => navigate('Register')}/>
     )
   }
 }

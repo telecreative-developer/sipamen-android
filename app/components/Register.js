@@ -1,114 +1,138 @@
-import React, { Component } from 'react'
-import { StyleSheet, Image, View, StatusBar, Dimensions, TouchableOpacity, TouchableHighlight, RegisteredStyle } from 'react-native'
-import { Container,
+import React from 'react'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import {
+  Container,
   Button,
   Text,
   Item,
   Input,
+  Header,
+  Left,
   Icon,
+  Right,
+  Content,
+  Body,
+  Title,
   H2 } from 'native-base'
-import logo from '../assets/images/logo.png'
-import ThemeContainer from '../components/ThemeContainer'
+import ThemeContainer from '../particles/ThemeContainer'
+import PropTypes from 'prop-types'
 
-const { width, height } = Dimensions.get('window')
+const Register = (props) => (
+  <Container style={styles.container}>
+    <Header>
+      <Left>
+        <Button transparent onPress={props.handleBack}>
+          <Icon name='arrow-back' />
+        </Button>
+      </Left>
+      <Body>
+        <Title>
+          Registrasi
+        </Title>
+      </Body>
+      <Right />
+    </Header>
+    <Content>
+      <View style={styles.viewFormTop}>
+        <Item regular>
+          <Input placeholder='Nama Depan' style={styles.textInput} value={props.firstName} onChangeText={props.onChangeFirstName} />
+        </Item>
+      </View>
+      <View style={styles.viewFormTop}>
+        <Item regular>
+          <Input placeholder='Nama Belakang' style={styles.textInput} value={props.lastName} onChangeText={props.onChangeLastName} />
+        </Item>
+      </View>
+      <View style={styles.viewForm}>
+        <Item regular>
+          <Input keyboardType='email-address' placeholder='Email' style={styles.textInput} value={props.email} onChangeText={props.onChangeEmail} />
+        </Item>
+      </View>
+      <View style={styles.viewForm}>
+        <Item regular>
+          <Input keyboardType='numeric' placeholder='NRP' style={styles.textInput} value={props.nrp} onChangeText={props.onChangeNRP} />
+        </Item>
+      </View>
+      <View style={styles.viewForm}>
+        <Item regular>
+          <Input keyboardType='numeric' placeholder='No Serdik' style={styles.textInput} value={props.noSerdik} onChangeText={props.onChangeNoSerdik} />
+        </Item>
+      </View>
+      <View style={styles.viewForm}>
+        <Item regular>
+          <Input keyboardType='numeric' placeholder='Angkatan' style={styles.textInput} value={props.forceOf} onChangeText={props.onChangeforceOf} />
+        </Item>
+      </View>
+      <View style={styles.viewForm}>
+        <Item regular>
+          <Input keyboardType='numeric' placeholder='No Handphone' style={styles.textInput} value={props.phone} onChangeText={props.onChangePhone} />
+        </Item>
+      </View>
+      <View style={styles.viewForm}>
+        <Item regular>
+          <Input secureTextEntry placeholder='Kata Sandi' style={styles.textInput} value={props.password} onChangeText={props.onChangePassword} />
+        </Item>
+      </View>
+      <View style={styles.viewForm}>
+        <Item regular>
+          <Input secureTextEntry placeholder='Ulangi Kata Sandi' style={styles.textInput} value={props.name} onChangeText={props.onChangeConfirmPassword} />
+        </Item>
+      </View>
+      {props.renderButtons}
+      <TouchableOpacity style={styles.backToLogin} onPress={props.handleBack}>
+        <Text note style={styles.backToLoginText}>Sudah punya akun? Masuk</Text>
+      </TouchableOpacity>
+    </Content>
+  </Container>
+)
 
-class Register extends Component { 
-  render() {
-    const { navigate } = this.props.navigation
-    return (
-      <Container style={styles.container}>
-        <View style={styles.formLogin}>
-          <Image source={logo} style={styles.logo}/>
-          <H2 style={styles.title}>Daftar Akun SESPIM</H2>
-          <Item regular style={styles.item}>
-            <Input placeholder='Nama Lengkap' style={styles.input}/>
-          </Item>
-          <Item regular style={styles.item}>
-            <Input placeholder='Email' style={styles.input}/>
-          </Item>
-          <Item regular style={styles.item}>
-            <Input placeholder='Kata Sandi' style={styles.input}/>
-          </Item>
-          <Item regular style={styles.item}>
-            <Input placeholder='Ulangi Kata Sandi' style={styles.input}/>
-          </Item>
-          <Button full style={styles.button} onPress={() => navigate('Start')}> 
-            <Text style={styles.buttonText}>Daftar</Text>
-          </Button>
-          <TouchableHighlight onPress={() => navigate('Login')}>
-            <Text style={styles.register}>Sudah punya akun? <Text style={styles.registerNow}>Masuk</Text></Text>
-          </TouchableHighlight>
-        </View>
-      </Container>
-    )
-  }
+Register.propTypes = {
+  handleBack: PropTypes.func,
+  firstName: PropTypes.string,
+  onChangeFirstName: PropTypes.func,
+  lastName: PropTypes.string,
+  onChangeLastName: PropTypes.func,
+  email: PropTypes.string,
+  onChangeEmail: PropTypes.func,
+  nrp: PropTypes.number,
+  onChangeNRP: PropTypes.func,
+  noSerdik: PropTypes.number,
+  onChangeNoSerdik: PropTypes.func,
+  forceOf: PropTypes.number,
+  onChangeforceOf: PropTypes.func,
+  phone: PropTypes.number,
+  onChangePhone: PropTypes.func,
+  password: PropTypes.string,
+  onChangePassword: PropTypes.func,
+  confirmPassword: PropTypes.string,
+  onChangeConfirmPassword: PropTypes.func,
+  renderButtons: PropTypes.func
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#ffffff'
   },
-  image: {
-    width: 200,
-    height: 200
-  },
-  text: {
-    textAlign: 'center',
-    marginVertical: 10,
+  textInput: {
     fontSize: 12
   },
-  title: {
-    textAlign: 'center',
-    marginVertical: 10,
-    fontWeight: 'bold',
-    fontFamily: 'SourceSansPro-SemiBold',
-  },
-  button: {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: '#106538',
-    marginTop: 15,
-    paddingHorizontal: '5%' 
-  },
-  buttonText: {
-    fontSize: 12,
-    fontWeight: 'bold'
-  },
-  formLogin: {
-    width: width / 1.3,
-    justifyContent: 'center',
+  backToLogin: {
     alignItems: 'center',
+    margin: 30
   },
-  input: {
-    height: 40,
-    fontSize: 12
+  backToLoginText: {
+    color: '#212121'
   },
-  item: {
-    marginTop: 10
+  viewFormTop: {
+    marginHorizontal: 30,
+    marginTop: 20,
+    justifyContent: 'center'
   },
-  buttonFacebook: {
-    backgroundColor: '#3b5998'
-  },
-  icon: {
-    fontSize: 16,
-    marginRight: 0
-  },
-  register: {
-    textAlign: 'center',
-    marginVertical: 25,
-    fontSize: 12
-  },
-  registerNow: {
-    color: '#00008b',
-    fontSize: 12
-  },
-  logo: {
-    width: 150,
-    height: 150
+  viewForm: {
+    marginHorizontal: 30,
+    marginTop: 10,
+    justifyContent: 'center'
   }
 })
 
-export default (ThemeContainer(Register))
+export default ThemeContainer(Register)

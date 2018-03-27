@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet, Image, View, Alert, Dimensions, TouchableHighlight, BackHandler } from 'react-native'
-import { Container, Button, Text, Item, Spinner, Input, Icon } from 'native-base'
+import { StyleSheet, Image, View, Dimensions, TouchableOpacity } from 'react-native'
+import { Container, Item, Input, Text } from 'native-base'
 import PropsTypes from 'prop-types'
 import ThemeContainer from '../particles/ThemeContainer'
 import image from '../assets/images/logo.jpg'
 
-const { width, height } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 const Login = (props) => (
   <Container style={styles.container}>
@@ -28,6 +28,9 @@ const Login = (props) => (
           onChangeText={props.onChangePassword} />
       </Item>
       {props.renderButtons}
+      <TouchableOpacity onPress={props.navigateToRegister} style={{alignItems: 'center', margin: 20}}>
+        <Text style={{fontSize: 12, color: '#212121'}}>Belum mempunyai akun SIPAMEN? Daftar disini</Text>
+      </TouchableOpacity>
     </View>
   </Container>
 )
@@ -36,7 +39,8 @@ Login.propTypes = {
   valueEmail: PropsTypes.string,
   valuePassword: PropsTypes.string,
   onChangeEmail: PropsTypes.func,
-  onChangePassword: PropsTypes.func
+  onChangePassword: PropsTypes.func,
+  navigateToRegister: PropsTypes.func
 }
 
 const styles = StyleSheet.create({

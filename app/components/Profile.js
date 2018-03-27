@@ -2,8 +2,6 @@ import React from 'react'
 import {
   StyleSheet,
   Dimensions,
-  FlatList,
-  Image,
   View
 } from 'react-native'
 import {
@@ -11,19 +9,19 @@ import {
   Thumbnail,
   Text,
   Content,
-  Header,
-  Col,
   Item,
   Input,
   Tab,
   Tabs,
   Form,
-  Label
+  Label,
+  Card,
+  CardItem,
+  Body,
+  H1
 } from 'native-base'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 import defaultAvatar from '../assets/images/default-avatar.jpg'
-import ThemeContainer from '../particles/ThemeContainer'
 
 const { height, width } = Dimensions.get('window')
 
@@ -69,14 +67,29 @@ const Profile = (props) => (
             </Item>
           </Form>
         </Tab>
-        <Tab heading='Status'>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            refreshing={props.refreshing}
-            onRefresh={props.handleRefresh}
-            data={props.posts}
-            keyExtractor={(item, index) => index}
-            renderItem={props.renderPosts} />
+        <Tab heading='Nilai'>
+          <Content>
+            <Card>
+              <CardItem header>
+                <Text>NRK</Text>
+              </CardItem>
+              <CardItem>
+                <Body>
+                <H1>{props.nrk}</H1>
+                </Body>
+              </CardItem>
+            </Card>
+            <Card>
+              <CardItem header>
+                <Text>NAD</Text>
+              </CardItem>
+              <CardItem>
+                <Body>
+                <H1>{props.nad}</H1>
+                </Body>
+              </CardItem>
+            </Card>
+          </Content>
         </Tab>
       </Tabs>
     </Content>
@@ -92,7 +105,9 @@ Profile.propTypes = {
   birthOfPlace: PropTypes.string,
   birthOfDate: PropTypes.string,
   refreshing: PropTypes.bool,
-  handleRefresh: PropTypes.func
+  handleRefresh: PropTypes.func,
+  nrk: PropTypes.number,
+  nad: PropTypes.number
 }
 
 const styles = StyleSheet.create({

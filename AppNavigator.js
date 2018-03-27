@@ -14,12 +14,14 @@ import DocumentListContainer from './app/containers/DocumentListContainer'
 import DocumentViewerContainer from './app/containers/DocumentViewerContainer'
 import TimelineContainer from './app/containers/TimelineContainer'
 import POKUjiContainer from './app/containers/POKUjiContainer'
-import ScoreContainer from "./app/containers/ScoreContainer";
+import ScoreContainer from "./app/containers/ScoreContainer"
+import RegisterContainer from "./app/containers/RegisterContainer"
 
 const AppNavigator = StackNavigator({
   Splash: {screen: SplashContainer},
   ComponentPage: {screen: ComponentContainer},
   Login: {screen: LoginContainer},
+  Register: {screen: RegisterContainer},
   EditProfile: {screen: EditProfileContainer},
   ChangePassword: {screen: ChangePasswordContainer},
   Timeline: {screen: TimelineContainer},
