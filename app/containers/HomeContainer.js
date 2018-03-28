@@ -69,8 +69,8 @@ class HomeContainer extends React.Component {
     }
   }
 
-  handleNavigateProfile() {
-    this.props.setNavigate('DocumentViewer', {document_title: 'Profil Sipamen', document_url: 'https://res.cloudinary.com/nandonrp/image/upload/v1522006150/ProfileSipamen_rgf0gk.pdf'})
+  handleNavigateInfo() {
+    this.props.setNavigate('DocumentViewer', {document_title: 'Info Sespimmen', document_url: 'https://res.cloudinary.com/nandonrp/image/upload/v1522159979/infosespimsementara_rkljnp.pdf'})
   }
 
   handleNavigateCalendar() {
@@ -104,7 +104,7 @@ class HomeContainer extends React.Component {
     return (
       <Home
         banners={bannerImages.map((image, index) => this.renderBanners(image, index))}
-        navigateProfile={() => this.handleNavigateProfile()}
+        navigateInfo={() => this.handleNavigateInfo()}
         navigateCalendar={() => this.handleNavigateCalendar()}
         dataMenus={dataMenus}
         renderMenus={this.renderMenus} />

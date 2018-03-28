@@ -3,7 +3,7 @@ import { StyleSheet, Image, View, Dimensions, TouchableOpacity } from 'react-nat
 import { Container, Item, Input, Text } from 'native-base'
 import PropsTypes from 'prop-types'
 import ThemeContainer from '../particles/ThemeContainer'
-import image from '../assets/images/logo.jpg'
+import image from '../assets/images/logo.png'
 
 const { width } = Dimensions.get('window')
 

@@ -35,9 +35,9 @@ const Home = (props) => (
     <Content showsVerticalScrollIndicator={false}>
       <Grid style={styles.grid}>
         <Col style={styles.leftCol}>
-          <Button transparent onPress={props.navigateProfile} style={styles.buttonDouble}>
-            <Icon name='md-person' style={styles.icon} />
-            <Text style={styles.topButtonText} uppercase={false}>Profile</Text>
+          <Button transparent onPress={props.navigateInfo} style={styles.buttonDouble}>
+            <Icon name='md-information-circle' style={styles.icon} />
+            <Text style={styles.topButtonText} uppercase={false}>Info Sespimmen</Text>
           </Button>
         </Col>
         <Col style={styles.rightCol}>
@@ -62,7 +62,7 @@ const Home = (props) => (
 
 Home.propTypes = {
   banners: PropTypes.any,
-  navigateScore: PropTypes.func,
+  navigateInfo: PropTypes.func,
   navigateCalender: PropTypes.func,
   dataMenus: PropTypes.array,
   renderMenus: PropTypes.any

@@ -3,7 +3,7 @@ import { Image, StyleSheet, Dimensions } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import { Container } from 'native-base'
 import ThemeContainer from '../particles/ThemeContainer'
-import logo from '../assets/images/logo.jpg'
+import logo from '../assets/images/logo.png'
 
 const { width, height } = Dimensions.get('window')
 
