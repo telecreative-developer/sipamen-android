@@ -76,7 +76,6 @@ class TimelineContainer extends React.Component {
 
 
   renderImages(data, index) {
-    console.log(data)
     return (
       <View key={index}>
         <Image style={{height: 270}} source={{uri: data.thumbnail_url}} />

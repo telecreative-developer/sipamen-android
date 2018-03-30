@@ -50,6 +50,7 @@ export const sendComment = (userId, userName, data, accessToken) => {
 			await dispatch(setSuccess(true, 'SUCCESS_SEND_COMMENT'))
 			await dispatch(setLoading(false, 'LOADING_SEND_COMMENT'))
 		}catch (e) {
+			console.log(e)
 			dispatch(setFailed(true, 'FAILED_SEND_COMMENT', e))
 			dispatch(setLoading(false, 'LOADING_SEND_COMMENT'))
 		}

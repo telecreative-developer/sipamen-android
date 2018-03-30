@@ -3,9 +3,19 @@ import { View, StyleSheet, Image, Dimensions } from 'react-native'
 import PropTypes from 'prop-types'
 import { Container, ListItem, Text, Title, Footer, Item, Subtitle, Header, Left, Button, Icon, Thumbnail, Input, Body, Right, Content } from 'native-base'
 import moment from 'moment'
+import Carousel from 'react-native-banner-carousel'
+import defaultAvatar from '../assets/images/default-avatar.jpg'
 import ThemeContainer from '../particles/ThemeContainer'
 
-const { width, height } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
+
+const renderImages = (data, index) => {
+  return (
+    <View key={index}>
+      <Image style={{height: 270}} source={{uri: data.thumbnail_url}} />
+    </View>
+  )
+}
 
 const Post = (props) => (
   <Container style={styles.container}>
@@ -31,8 +41,14 @@ const Post = (props) => (
         <View style={styles.contentPostFluid}>
           <Text style={styles.post}>{props.postContent}</Text>
         </View>
-        {props.postThumbnail !== null && (
-          <Image source={{uri: props.postThumbnail}} style={styles.thumbnail} />
+        {props.postThumbnail.length !== 0 && (
+          <Carousel
+            showsPageIndicator={props.postThumbnail.length > 1 ? true : false}
+            autoplay={false}
+            loop={false}
+            index={0}>
+            {props.postThumbnail.map((image, index) => renderImages(image, index))}
+          </Carousel>
         )}
       </View>
       {props.comments.map((item, index) => (
@@ -78,6 +94,7 @@ Post.propTypes = {
   postAvatar: PropTypes.string,
   postDate: PropTypes.string,
   postContent: PropTypes.string,
+  postThumbnail: PropTypes.array,
   comments: PropTypes.array,
   handleSendComment: PropTypes.func
 }
@@ -123,8 +140,9 @@ const styles = StyleSheet.create({
   },
   contentPost: {
     borderBottomColor: '#E9E9E9',
-    borderBottomWidth: 0.5,
-    marginBottom: 10
+    borderBottomWidth: 1,
+    marginBottom: 10,
+    paddingBottom: 20
   },
   contentPostFluid: {
     margin: 15

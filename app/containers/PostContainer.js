@@ -22,12 +22,13 @@ class PostContainer extends React.Component {
 
   handleSendComment() {
     const { sendComment, sessionPersistance } = this.props
-    const { comment, post_id, userId } = this.state
+    const { params } = this.props.navigation.state
+    const { comment } = this.state
     if(comment !== '') {
-      sendComment(userId,
+      sendComment(params.id,
         `${sessionPersistance.first_name} ${sessionPersistance.last_name}`, {
         comment: comment,
-        post_id: post_id,
+        post_id: params.post_id,
         id: sessionPersistance.id,
       }, sessionPersistance.accessToken)
       this.setState({comment: ''})
@@ -60,7 +61,7 @@ class PostContainer extends React.Component {
       <Post
         postAvatar={params.users[0].avatar_url}
         postName={`${params.users[0].first_name} ${params.users[0].last_name}`}
-        postThumbnail={params.image}
+        postThumbnail={params.thumbnails}
         postContent={params.post}
         postDate={params.createdAt}
         avatar={sessionPersistance.avatar_url}
