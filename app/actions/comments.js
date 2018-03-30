@@ -44,13 +44,14 @@ export const sendComment = (userId, userName, data, accessToken) => {
 				},
 				body: JSON.stringify(data)
 			})
-			await dispatch(sendNotification(userId, `${userName} mengomentari status anda: "${data.comment}"`, accessToken))
-			await dispatch(saveNotification({type: 'comment', content: data.comment, post_id: data.post_id, myid: userId, id: data.id}, accessToken))
-			await dispatch(fetchComments(data.post_id, accessToken))
+      if(userId !== data.id) {
+        await dispatch(sendNotification(userId, `${userName} mengomentari kegiatan anda: "${data.comment}"`, accessToken))
+        await dispatch(saveNotification({type: 'comment', content: data.comment, post_id: data.post_id, myid: userId, id: data.id}, accessToken))
+			}
+      await dispatch(fetchComments(data.post_id, accessToken))
 			await dispatch(setSuccess(true, 'SUCCESS_SEND_COMMENT'))
 			await dispatch(setLoading(false, 'LOADING_SEND_COMMENT'))
 		}catch (e) {
-			console.log(e)
 			dispatch(setFailed(true, 'FAILED_SEND_COMMENT', e))
 			dispatch(setLoading(false, 'LOADING_SEND_COMMENT'))
 		}

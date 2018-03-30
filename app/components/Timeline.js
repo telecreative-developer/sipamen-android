@@ -1,8 +1,6 @@
 import React from 'react'
 import {
   StyleSheet,
-  ToastAndroid,
-  Dimensions,
   View,
   Image,
   FlatList,
@@ -16,24 +14,12 @@ import {
   Right,
   Header,
   Title,
-  Card,
-  CardItem,
-  Thumbnail,
   Text,
-  Button,
-  Grid,
-  Col,
-  Item,
-  Input,
-  Footer,
-  ListItem
+  Button
 } from 'native-base'
-import Modal from 'react-native-modal'
-import moment from 'moment'
 import PropTypes from 'prop-types'
+import box from '../assets/images/box.png'
 import ThemeContainer from '../particles/ThemeContainer'
-
-const { height, width } = Dimensions.get("window")
 
 const Timeline = (props) => (
   <Container style={styles.container}>
@@ -49,13 +35,20 @@ const Timeline = (props) => (
       <Right />
     </Header>
     {props.children}
-    <FlatList
-      showsVerticalScrollIndicator={false}
-      refreshing={props.refreshing}
-      onRefresh={props.handleRefresh}
-      data={props.posts}
-      keyExtractor={(item, index) => JSON.stringify(index)}
-      renderItem={props.renderPosts} />
+    {props.posts.length !== 0 ? (
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        refreshing={props.refreshing}
+        onRefresh={props.handleRefresh}
+        data={props.posts}
+        keyExtractor={(item, index) => JSON.stringify(index)}
+        renderItem={props.renderPosts} />
+    ) : (
+      <View style={{flex: 1, alignItems: 'center', marginTop: 30}}>
+        <Image source={box} style={{width: 100, height: 100, opacity: 0.3}}/>
+        <Text style={{fontWeight: 'bold', opacity: 0.3, fontSize: 16}}>Belum ada kegiatan</Text>
+      </View>
+    )}
     <View>
       <Fab active style={styles.fab} position="bottomRight" onPress={props.handleNavigateToCreatePost}>
         <Icon name='create' />

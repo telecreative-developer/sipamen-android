@@ -41,7 +41,7 @@ const Post = (props) => (
         <View style={styles.contentPostFluid}>
           <Text style={styles.post}>{props.postContent}</Text>
         </View>
-        {props.postThumbnail.length !== 0 && (
+        {props.postThumbnail && (
           <Carousel
             showsPageIndicator={props.postThumbnail.length > 1 ? true : false}
             autoplay={false}
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E9E9E9',
     borderBottomWidth: 1,
     marginBottom: 10,
-    paddingBottom: 20
+    paddingBottom: 10
   },
   contentPostFluid: {
     margin: 15

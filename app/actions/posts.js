@@ -29,6 +29,7 @@ export const fetchPosts = (accessToken) => {
 			let result = await data.data.map(d => ({
 				post_id: d.post_id,
 				post: d.post,
+				id: d.id,
 				users: d.users,
 				thumbnails: dataThumbnails.data.filter(df => df.post_id === d.post_id),
 				updatedAt: d.updatedAt,
@@ -38,7 +39,6 @@ export const fetchPosts = (accessToken) => {
 			await dispatch(setSuccess(true, 'SUCCESS_FETCH_POSTS'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_POSTS'))
 		} catch (e) {
-			console.log(e)
 			dispatch(setFailed(true, 'FAILED_FETCH_POSTS', e))
 			dispatch(setLoading(false, 'LOADING_FETCH_POSTS'))
 		}

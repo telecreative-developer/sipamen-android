@@ -43,11 +43,11 @@ const dataMenus = [
   }
 ]
 
-const { height, width } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
 const bannerWidth = Dimensions.get('window').width
 
-const bannerHeight = 270
+const bannerHeight = height / 2.6
 
 class HomeContainer extends React.Component {
 
@@ -56,7 +56,8 @@ class HomeContainer extends React.Component {
     if(item.type === 'standar-kompetensi') {
       setNavigate('DocumentViewer', dataStandarKompetensi)
     }else if(item.type === 'data-nilai') {
-      setNavigate('Score', item)
+      // setNavigate('Score', item)
+      Alert.alert('Pemberitahuan', 'Nilai belum bisa ditampilkan karena ujian belum dimulai.')
     }else if(item.type === 'data-serdik') {
       setNavigate('DocumentList', {documentTitle: 'Data Serdik', documentData: dataSerdik})
     }else if(item.type === 'kegiatan') {

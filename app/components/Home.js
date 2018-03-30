@@ -1,14 +1,12 @@
 import React from 'react'
-import { StyleSheet, Image, View, Dimensions, FlatList } from 'react-native'
+import { StyleSheet, View, Dimensions, FlatList } from 'react-native'
 import { Container, Content, Grid, Col, Button, Icon, Text } from 'native-base'
 import PropTypes from 'prop-types'
 import Carousel from 'react-native-banner-carousel'
 
-const { height, width } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
 const bannerWidth = Dimensions.get('window').width
-
-const bannerHeight = 270
 
 const formatData = (data, numColumns) => {
   const numberOfFullRows = Math.floor(data.length / numColumns)

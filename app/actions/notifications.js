@@ -58,8 +58,23 @@ export const fetchNotifications = (myid, accessToken) => {
           Authorization: accessToken
 				}
 			})
-			const data = await response.json()
-			await dispatch(receivedNotifications(data.data))
+      const data = await response.json()
+      const responseThumbnails = await fetch(`${API_SERVER}/thumbnails?$sort[createdAt]=-1`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: accessToken
+        }
+      })
+			const dataThumbnails = await responseThumbnails.json()
+			await dispatch(receivedNotifications(data.data.map(d => ({
+        ...d,
+        posts: d.posts.map(dp => ({
+          ...dp,
+          thumbnails: dataThumbnails.data.filter(df => df.post_id === dp.post_id)
+        }))
+      }))))
 			await dispatch(setSuccess(true, 'SUCCESS_FETCH_NOTIFICATIONS'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_NOTIFICATIONS'))
 		} catch (e) {

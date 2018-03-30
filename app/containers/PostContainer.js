@@ -16,6 +16,7 @@ class PostContainer extends React.Component {
   
   async componentDidMount() {
     const { params } = await this.props.navigation.state
+    await console.log('params', params)
     const { sessionPersistance, fetchComments } = await this.props
     await fetchComments(params.post_id, sessionPersistance.accessToken)
   }
