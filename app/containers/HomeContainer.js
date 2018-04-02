@@ -5,9 +5,9 @@ import { setNavigate } from '../actions/processor'
 import Home from '../components/Home'
 
 const bannerImages = [
-  'http://www.sayangi.com/homeapps/uploads/2017/03/Siswa-Sespimmen.jpg',
-  'http://www.rmolsumut.com/images/berita/2017/04/159546_04450005042017_sespimti.jpg',
-  'http://kabarmedan.com/wp-content/uploads/2017/09/Sespim-4.jpg'
+  'https://res.cloudinary.com/nandonrp/image/upload/v1522648782/Sespim-Banner-3_soivb6.jpg',
+  'https://res.cloudinary.com/nandonrp/image/upload/v1522648782/Sespim-Banner-2_yzuflc.jpg',
+  'https://res.cloudinary.com/nandonrp/image/upload/v1522648782/Sespim-Banner-1_wgcyca.jpg'
 ]
 
 const dataMenus = [
