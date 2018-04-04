@@ -23,11 +23,11 @@ export const register = item => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          firts_name: capitalizeFirstLetter(item.first_name),
+          ...item,
+          first_name: capitalizeFirstLetter(item.first_name),
           last_name: capitalizeFirstLetter(item.last_name),
           email: toLower(item.email),
-          verified: false,
-          ...item
+          verified: false
         })
       })
       const data = await response.json()
