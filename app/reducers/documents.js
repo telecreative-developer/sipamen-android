@@ -1,4 +1,4 @@
-import { DATA_STANDAR_KOMPETENSI, DATA_SERDIK, DATA_HANDBOOK } from '../constants'
+import {DATA_STANDAR_KOMPETENSI, DATA_SERDIK, DATA_HANDBOOK, DATA_INFO_SESPIMMEN} from '../constants'
 
 export const dataStandarKompetensi = (state = [], action) => {
 	switch (action.type) {
@@ -25,4 +25,13 @@ export const dataHandbook = (state = [], action) => {
 		default:
 			return state
 	}
+}
+
+export const dataInfoSespimmen = (state = [], action) => {
+  switch (action.type) {
+    case DATA_INFO_SESPIMMEN:
+      return action.payload
+    default:
+      return state
+  }
 }

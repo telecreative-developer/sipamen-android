@@ -4,9 +4,11 @@ import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { login } from '../actions/login'
 import Splash from '../components/Splash'
+import {fetchBanners} from "../actions/banners"
 
 class SplashContainer extends React.PureComponent {
   async componentDidMount() {
+  	await this.props.fetchBanners()
     const session = await AsyncStorage.getItem('session')
 		const data = await JSON.parse(session)
 		setTimeout(() => {
@@ -41,7 +43,8 @@ class SplashContainer extends React.PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-	login: (email, password) => dispatch(login(email, password))
+	login: (email, password) => dispatch(login(email, password)),
+	fetchBanners: () => dispatch(fetchBanners())
 })
 
 export default connect(null, mapDispatchToProps)(SplashContainer)

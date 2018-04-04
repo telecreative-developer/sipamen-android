@@ -4,19 +4,19 @@ import { sessionPersistance } from './login'
 import { posts, myPosts } from './posts'
 import { events } from './events'
 import { comments } from './comments'
-import { articles } from './articles'
 import { notifications, generalNotifications } from './notifications'
-import { dataStandarKompetensi, dataSerdik, dataHandbook } from './documents'
+import { dataStandarKompetensi, dataSerdik, dataHandbook, dataInfoSespimmen } from './documents'
 import { pokUji } from './pokuji'
 import { twitterToken, tweets } from './twitter'
 import { scores } from './scores'
 import { dataImages } from './images'
+import { banners } from "./banners"
 
 const rootReducers = combineReducers({
-  posts, events, comments, articles, sessionPersistance, notifications,
+  posts, events, banners, comments, sessionPersistance, notifications,
   loading, loadingDownload, success, successDownload, failed, failedDownload,
   navigate, activePageHome, myPosts, generalNotifications, twitterToken,
-  dataStandarKompetensi, dataSerdik, dataHandbook, pokUji, tweets, scores, dataImages
+  dataStandarKompetensi, dataSerdik, dataHandbook, dataInfoSespimmen, pokUji, tweets, scores, dataImages
 })
 
 export default rootReducers

@@ -1,5 +1,5 @@
 import { setLoading, setFailed, setSuccess, setDownloadSuccess, setDownloadLoading, setDownloadFailed } from './processor'
-import { DATA_STANDAR_KOMPETENSI, DATA_SERDIK, DATA_HANDBOOK } from '../constants'
+import { DATA_STANDAR_KOMPETENSI, DATA_INFO_SESPIMMEN, DATA_SERDIK, DATA_HANDBOOK } from '../constants'
 import RNFetchBlob from 'react-native-fetch-blob'
 import { API_SERVER } from '../env'
 
@@ -22,6 +22,8 @@ export const fetchDocuments = (type, accessToken) => {
         dispatch(dataSerdik(data.data))
       }else if(type === 'handbook') {
         dispatch(dataHanbook(data.data))
+      }else if(type === 'info-sespimmen') {
+        dispatch(dataInfoSespimmen(data.data[0]))
       }
 			await dispatch(setSuccess(true, 'SUCCESS_FETCH_DOCUMENTS'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_DOCUMENTS'))
@@ -45,6 +47,11 @@ const dataSerdik = data => ({
 const dataHanbook = data => ({
 	type: DATA_HANDBOOK,
 	payload: data
+})
+
+const dataInfoSespimmen = data => ({
+  type: DATA_INFO_SESPIMMEN,
+  payload: data
 })
 
 export const downloadDocument = (index, document_url) => {

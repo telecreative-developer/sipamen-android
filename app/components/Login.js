@@ -29,7 +29,7 @@ const Login = (props) => (
       </Item>
       {props.renderButtons}
       <TouchableOpacity onPress={props.navigateToRegister} style={{alignItems: 'center', margin: 20}}>
-        <Text style={{fontSize: 12, color: '#212121'}}>Belum mempunyai akun SIPAMEN? Daftar disini</Text>
+        <Text style={{fontSize: 12, color: '#212121'}}>Belum mempunyai akun? Daftar disini</Text>
       </TouchableOpacity>
     </View>
   </Container>

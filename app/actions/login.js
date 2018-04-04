@@ -6,6 +6,7 @@ import { API_SERVER } from '../env'
 import { fetchDocuments } from './documents'
 import { getBearerToken } from './twitter'
 import { fetchScores } from './scores'
+import { fetchBanners } from "./banners"
 
 export const login = (email, password, onesignalId) => {
 	return async dispatch => {
@@ -28,12 +29,12 @@ export const login = (email, password, onesignalId) => {
 				await dispatch(fetchDocuments('standar-kompetensi', data.accessToken))
 				await dispatch(fetchDocuments('data-serdik', data.accessToken))
 				await dispatch(fetchDocuments('handbook', data.accessToken))
+        await dispatch(fetchDocuments('info-sespimmen', data.accessToken))
 				await dispatch(getBearerToken())
 				await dispatch(setSuccess(true, 'SUCCESS_PROCESS_LOGIN'))
 				await dispatch(setLoading(false, 'LOADING_PROCESS_LOGIN'))
 			}
 		} catch (e) {
-			console.log(e)
 			dispatch(setFailed(true, 'FAILED_PROCESS_LOGIN', e))
 			dispatch(setLoading(false, 'LOADING_PROCESS_LOGIN'))
 			dispatch(setFailed(false, 'FAILED_PROCESS_LOGIN'))

@@ -121,7 +121,7 @@ class LoginContainer extends React.Component {
         onChangeEmail={(email) => this.setState({email})}
         onChangePassword={(password) => this.setState({password})}
         renderButtons={this.renderButtons()}
-        navigateToRegister={() => navigate('Register')}/>
+        navigateToRegister={() => navigate('Register')} />
     )
   }
 }

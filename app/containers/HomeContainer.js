@@ -4,12 +4,6 @@ import { connect } from 'react-redux'
 import { setNavigate } from '../actions/processor'
 import Home from '../components/Home'
 
-const bannerImages = [
-  'https://res.cloudinary.com/nandonrp/image/upload/v1522648782/Sespim-Banner-3_soivb6.jpg',
-  'https://res.cloudinary.com/nandonrp/image/upload/v1522648782/Sespim-Banner-2_yzuflc.jpg',
-  'https://res.cloudinary.com/nandonrp/image/upload/v1522648782/Sespim-Banner-1_wgcyca.jpg'
-]
-
 const dataMenus = [
   {
     icon: 'http://res.cloudinary.com/nandonrp/image/upload/v1516635388/tujuan_bsowjk.png',
@@ -52,7 +46,7 @@ const bannerHeight = height / 2.6
 class HomeContainer extends React.Component {
 
   async handleNavigateTo(item) {
-    const { setNavigate, dataStandarKompetensi, dataSerdik, dataHandbook, sessionPersistance } = this.props
+    const { setNavigate, dataStandarKompetensi, dataSerdik, dataHandbook } = this.props
     if(item.type === 'standar-kompetensi') {
       setNavigate('DocumentViewer', dataStandarKompetensi)
     }else if(item.type === 'data-nilai') {
@@ -71,7 +65,7 @@ class HomeContainer extends React.Component {
   }
 
   handleNavigateInfo() {
-    this.props.setNavigate('DocumentViewer', {document_title: 'Info Sespimmen', document_url: 'https://res.cloudinary.com/nandonrp/image/upload/v1522159979/infosespimsementara_rkljnp.pdf'})
+    this.props.setNavigate('DocumentViewer', this.props.dataInfoSespimmen)
   }
 
   handleNavigateCalendar() {
@@ -93,18 +87,19 @@ class HomeContainer extends React.Component {
     )
   }
 
-  renderBanners(image, index) {
+  renderBanners(banner, index) {
     return (
       <View key={index} style={styles.banner}>
-        <Image style={styles.bannerImage} source={{uri: image}} />
+        <Image style={styles.bannerImage} source={{uri: banner.banner_url}} />
       </View>
     )
   }
 
   render() {
+    const { banners } = this.props
     return (
       <Home
-        banners={bannerImages.map((image, index) => this.renderBanners(image, index))}
+        banners={banners.map((banner, index) => this.renderBanners(banner, index))}
         navigateInfo={() => this.handleNavigateInfo()}
         navigateCalendar={() => this.handleNavigateCalendar()}
         dataMenus={dataMenus}
@@ -117,7 +112,9 @@ const mapStateToProps = state => ({
   sessionPersistance: state.sessionPersistance,
   dataStandarKompetensi: state.dataStandarKompetensi,
   dataSerdik: state.dataSerdik,
-  dataHandbook: state.dataHandbook
+  dataHandbook: state.dataHandbook,
+  banners: state.banners,
+  dataInfoSespimmen: state.dataInfoSespimmen
 })
 
 const mapDispatchToProps = dispatch => ({
