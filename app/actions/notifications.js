@@ -1,6 +1,6 @@
 import OneSignal from 'react-native-onesignal'
 import { setLoading, setFailed, setSuccess } from './processor'
-import { RECEIVED_NOTIFICATIONS, RECEIVED_GENERAL_NOTIFICATIONS } from '../constants'
+import { RECEIVED_NOTIFICATIONS, RECEIVED_GENERAL_NOTIFICATION_EVENTS, RECEIVED_GENERAL_NOTIFICATION_ANNOUNCEMENTS } from '../constants'
 import { API_SERVER } from '../env'
 
 export const initialOneSignal = (data, accessToken) => {
@@ -102,7 +102,8 @@ export const fetchGeneralNotifications = (accessToken) => {
 				}
 			})
 			const data = await response.json()
-			await dispatch(receivedGeneralNotifications(data.data))
+			await dispatch(receivedGeneralNotificationEvents(data.data.filter(d => d.type === 'event')))
+      await dispatch(receivedGeneralNotificationAnnouncements(data.data.filter(d => d.type === 'announcement')))
 			await dispatch(setSuccess(true, 'SUCCESS_FETCH_GENERAL_NOTIFICATIONS'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_GENERAL_NOTIFICATIONS'))
 		} catch (e) {
@@ -112,9 +113,14 @@ export const fetchGeneralNotifications = (accessToken) => {
 	}
 }
 
-const receivedGeneralNotifications = data => ({
-	type: RECEIVED_GENERAL_NOTIFICATIONS,
+const receivedGeneralNotificationEvents = data => ({
+	type: RECEIVED_GENERAL_NOTIFICATION_EVENTS,
 	payload: data
+})
+
+const receivedGeneralNotificationAnnouncements = data => ({
+  type: RECEIVED_GENERAL_NOTIFICATION_ANNOUNCEMENTS,
+  payload: data
 })
 
 export const sendNotification = (userId, item, accessToken) => {

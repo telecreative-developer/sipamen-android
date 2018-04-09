@@ -27,7 +27,7 @@ class NotificationContainer extends React.PureComponent {
     }else if(type === 'event') {
       return <Text note>{`membuat kegiatan baru: "${content}"`}</Text>
     }else if(type === 'announcement') {
-      return <Text note>{`membuat pengumuman baru: "${content}"`}</Text>
+      return <Text note numberOfLines={2}>{`membuat pengumuman baru: "${content}"`}</Text>
     }
   }
 
@@ -40,13 +40,14 @@ class NotificationContainer extends React.PureComponent {
   }
 
   render() {
-    const { notifications, generalNotifications, setNavigate } = this.props
+    const { notifications, generalNotificationEvents, generalNotificationAnnouncements, setNavigate } = this.props
     return (
       <Notification
         loadingNotifications={this.state.refreshing}
         onRefreshNotifications={() => this.handleRefresh()}
         notifications={notifications}
-        generalNotifications={generalNotifications}
+        generalNotificationEvents={generalNotificationEvents}
+        generalNotificationAnnouncements={generalNotificationAnnouncements}
         renderTimelineNotifications={({item}) => (
           <ListItem avatar style={styles.listNotification} onPress={() => setNavigate('Post', {...item.posts[0], users: item.users})}>
             <Left>
@@ -84,13 +85,13 @@ class NotificationContainer extends React.PureComponent {
           </ListItem>
         )}
         renderAnnouncementNotifications={({item}) => (
-          <ListItem avatar style={styles.listNotification}>
+          <ListItem avatar style={styles.listNotification} onPress={() => setNavigate('Announcement', {...item.announcements[0]})}>
             <Left>
               <Thumbnail source={defaultAvatar} />
             </Left>
             <Body>
               <Text note style={styles.name}>Admin</Text>
-              {this.notificationText(item.type, item.content)}
+              {this.notificationText(item.type, item.announcements[0].announcement)}
             </Body>
             <Right>
               <Text note>{moment(item.createdAt).format('LT')}</Text>
@@ -113,7 +114,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   notifications: state.notifications,
-  generalNotifications: state.generalNotifications,
+  generalNotificationEvents: state.generalNotificationEvents,
+  generalNotificationAnnouncements: state.generalNotificationAnnouncements,
   sessionPersistance: state.sessionPersistance
 })
 

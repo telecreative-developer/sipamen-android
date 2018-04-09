@@ -16,6 +16,7 @@ import TimelineContainer from './app/containers/TimelineContainer'
 import POKUjiContainer from './app/containers/POKUjiContainer'
 import ScoreContainer from "./app/containers/ScoreContainer"
 import RegisterContainer from "./app/containers/RegisterContainer"
+import AnnouncementContainer from "./app/containers/AnnouncementContainer"
 
 const AppNavigator = StackNavigator({
   Splash: {screen: SplashContainer},
@@ -30,6 +31,7 @@ const AppNavigator = StackNavigator({
   Post: {screen: PostContainer},
   CreatePost: {screen: CreatePostContainer},
   Event: {screen: EventContainer},
+  Announcement: {screen: AnnouncementContainer},
   DocumentList: {screen: DocumentListContainer},
   DocumentViewer: {screen: DocumentViewerContainer},
   POKUji: {screen: POKUjiContainer},

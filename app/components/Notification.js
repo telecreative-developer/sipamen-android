@@ -24,11 +24,11 @@ const Notification = (props) => (
           )}
         </Tab>
         <Tab heading='Acara'>
-          {props.generalNotifications.filter(notification => notification.type === 'event').length !== 0 ? (
+          {props.generalNotificationEvents.length !== 0 ? (
             <FlatList
               refreshing={props.loadingNotifications}
               onRefresh={props.onRefreshNotifications}
-              data={props.generalNotifications.filter(notification => notification.type === 'event')}
+              data={props.generalNotificationEvents}
               keyExtractor={(item, index) => JSON.stringify(index)}
               renderItem={props.renderEventNotifications} />
           ) : (
@@ -39,11 +39,11 @@ const Notification = (props) => (
           )}
         </Tab>
         <Tab heading='Pengumuman'>
-          {props.generalNotifications.filter(notification => notification.type === 'announcement').length !== 0 ? (
+          {props.generalNotificationAnnouncements.length !== 0 ? (
             <FlatList
               refreshing={props.loadingNotifications}
               onRefresh={props.onRefreshNotifications}
-              data={props.generalNotifications.filter(notification => notification.type === 'announcement')}
+              data={props.generalNotificationAnnouncements}
               keyExtractor={(item, index) => JSON.stringify(index)}
               renderItem={props.renderAnnouncementNotifications} />
           ) : (
@@ -62,6 +62,8 @@ Notification.propTypes = {
   loadingNotifications: PropTypes.bool,
   onRefreshNotifications: PropTypes.func,
   notifications: PropTypes.array,
+  generalNotificationEvents: PropTypes.array,
+  generalNotificationAnnouncements: PropTypes.array,
   renderTimelineNotifications: PropTypes.element,
   renderEventNotifications: PropTypes.element,
   renderAnnouncementNotifications: PropTypes.element

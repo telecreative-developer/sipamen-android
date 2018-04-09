@@ -53,6 +53,8 @@ class ComponentContainer extends React.Component {
       navigation.navigate(navigate.link, navigate.data)
     }else if(navigate.link === 'Event') {
       navigation.navigate(navigate.link, navigate.data)
+    }else if(navigate.link === 'Announcement') {
+      navigation.navigate(navigate.link, navigate.data)
     }else if(navigate.link === 'CreatePost') {
       navigation.navigate(navigate.link, navigate.data)
     }else if(navigate.link === 'DocumentViewer') {

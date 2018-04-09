@@ -6,7 +6,6 @@ import { API_SERVER } from '../env'
 import { fetchDocuments } from './documents'
 import { getBearerToken } from './twitter'
 import { fetchScores } from './scores'
-import { fetchBanners } from "./banners"
 
 export const login = (email, password, onesignalId) => {
 	return async dispatch => {
