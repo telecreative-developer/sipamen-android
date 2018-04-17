@@ -11,10 +11,10 @@ import PostContainer from './app/containers/PostContainer'
 import EventContainer from './app/containers/EventContainer'
 import CreatePostContainer from './app/containers/CreatePostContainer'
 import DocumentListContainer from './app/containers/DocumentListContainer'
+import DocumentSectionContainer from './app/containers/DocumentSectionContainer'
 import DocumentViewerContainer from './app/containers/DocumentViewerContainer'
 import TimelineContainer from './app/containers/TimelineContainer'
 import POKUjiContainer from './app/containers/POKUjiContainer'
-import ScoreContainer from "./app/containers/ScoreContainer"
 import RegisterContainer from "./app/containers/RegisterContainer"
 import AnnouncementContainer from "./app/containers/AnnouncementContainer"
 
@@ -33,9 +33,9 @@ const AppNavigator = StackNavigator({
   Event: {screen: EventContainer},
   Announcement: {screen: AnnouncementContainer},
   DocumentList: {screen: DocumentListContainer},
+  DocumentSection: {screen: DocumentSectionContainer},
   DocumentViewer: {screen: DocumentViewerContainer},
-  POKUji: {screen: POKUjiContainer},
-  Score: {screen: ScoreContainer}
+  POKUji: {screen: POKUjiContainer}
 }, {
   headerMode: 'none'
 })

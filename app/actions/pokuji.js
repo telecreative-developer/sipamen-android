@@ -1,13 +1,12 @@
 import { setLoading, setFailed, setSuccess } from './processor'
 import { RECEIVED_FETCH_POK_UJI } from '../constants'
 import { API_SERVER } from '../env'
-import _ from 'lodash'
 
 export const fetchPokUji = (accessToken) => {
 	return async dispatch => {
 		await dispatch(setLoading(true, 'LOADING_FETCH_POK_UJI'))
 		try {
-			const response = await fetch(`${API_SERVER}/pok-uji`, {
+			const response = await fetch(`${API_SERVER}/pokuji-documents`, {
 				method: 'GET',
 				headers: {
 					Accept: 'application/json',
@@ -16,7 +15,7 @@ export const fetchPokUji = (accessToken) => {
 				}
 			})
       const data = await response.json()
-			await dispatch(receivedPokUji(_.chain(data.data).groupBy('pok_uji').map((value, key) => ({title: key, data: value})).value()))
+			await dispatch(receivedPokUji(data.data[0]))
 			await dispatch(setSuccess(true, 'SUCCESS_FETCH_POK_UJI'))
 			await dispatch(setLoading(false, 'LOADING_FETCH_POK_UJI'))
 		}catch(e) {

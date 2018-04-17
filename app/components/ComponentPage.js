@@ -99,28 +99,28 @@ const ComponentPage = (props) => (
           active={props.activePageFirst}
           onPress={props.handleActivePageFirst}>
           <Icon name='home' style={{color: props.activePageFirst ? '#106538' : '#999999', fontSize: props.activePageFirst ? 27 : 25}} />
-          <Text uppercase={false} style={{color: props.activePageFirst ? '#106538' : '#999999', fontSize: props.activePageFirst ? 11 : 9}}>Home</Text>
+          <Text uppercase={false} style={{color: props.activePageFirst ? '#106538' : '#999999', fontSize: props.activePageFirst ? 10 : 9}}>Home</Text>
         </Button>
         <Button
           vertical
           active={props.activePageSecond}
           onPress={props.handleActivePageSecond}>
           <EntypoIcon name='twitter' style={{color: props.activePageSecond ? '#106538' : '#999999', fontSize: props.activePageSecond ? 27 : 25}} />
-          <Text uppercase={false} style={{color: props.activePageSecond ? '#106538' : '#999999', fontSize: props.activePageSecond ? 11 : 9}}>Tweet</Text>
+          <Text uppercase={false} style={{color: props.activePageSecond ? '#106538' : '#999999', fontSize: props.activePageSecond ? 10 : 9}}>Tweet</Text>
         </Button>
         <Button
           vertical
           active={props.activePageThird}
           onPress={props.handleActivePageThird}>
           <Icon name='notifications' style={{color: props.activePageThird ? '#106538' : '#999999', fontSize: props.activePageThird ? 27 : 25}} />
-          <Text uppercase={false} style={{color: props.activePageThird ? '#106538' : '#999999', fontSize: props.activePageThird ? 11 : 9}}>Notifications</Text>
+          <Text uppercase={false} style={{color: props.activePageThird ? '#106538' : '#999999', fontSize: props.activePageThird ? 10 : 9}}>Notifications</Text>
         </Button>
         <Button
           vertical
           active={props.activePageFourth}
           onPress={props.handleActivePageFourth}>
           <Icon name='person' style={{color: props.activePageFourth ? '#106538' : '#999999', fontSize: props.activePageFourth ? 27 : 25}} />
-          <Text uppercase={false} style={{color: props.activePageFourth ? '#106538' : '#999999', fontSize: props.activePageFourth ? 11 : 9}}>Profile</Text>
+          <Text uppercase={false} style={{color: props.activePageFourth ? '#106538' : '#999999', fontSize: props.activePageFourth ? 10 : 9}}>Profile</Text>
         </Button>
       </FooterTab>
     </Footer>

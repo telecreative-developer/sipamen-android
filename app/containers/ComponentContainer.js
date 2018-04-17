@@ -39,7 +39,7 @@ class ComponentContainer extends React.Component {
     return false
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps) {
     const { navigate, navigation } = nextProps
     if(navigate.link === 'EditProfile') {
       navigation.navigate(navigate.link, navigate.data)
@@ -60,6 +60,8 @@ class ComponentContainer extends React.Component {
     }else if(navigate.link === 'DocumentViewer') {
       navigation.navigate(navigate.link, navigate.data)
     }else if(navigate.link === 'DocumentList') {
+      navigation.navigate(navigate.link, navigate.data)
+    }else if(navigate.link === 'DocumentSection') {
       navigation.navigate(navigate.link, navigate.data)
     }else if(navigate.link === 'Timeline') {
       navigation.navigate(navigate.link, navigate.data)

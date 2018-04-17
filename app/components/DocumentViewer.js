@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
-import { Container, Header, Title, Left, Button, Icon, Body, Right } from 'native-base'
+import { Container, Header, Title, Subtitle, Left, Button, Icon, Body, Right } from 'native-base'
 import PdfViewer from 'react-native-pdf'
 import PropTypes from 'prop-types'
 import ThemeContainer from '../particles/ThemeContainer'
@@ -19,6 +19,9 @@ const DocumentViewer = (props) => (
         </Left>
         <Body>
           <Title>{props.documentTitle}</Title>
+          {props.documentSubtitle && (
+            <Subtitle>{props.documentSubtitle}</Subtitle>
+          )}
         </Body>
         <Right>
           <Button transparent onPress={props.handleTap} onPress={props.zoomIn}>
@@ -50,6 +53,7 @@ DocumentViewer.propTypes = {
   fileSoruce: PropTypes.string,
   documentFullscreen: PropTypes.bool,
   documentTitle: PropTypes.string,
+  documentSubtitle: PropTypes.string,
   download: PropTypes.bool,
   handleDownload: PropTypes.func,
   zoomIn: PropTypes.func,

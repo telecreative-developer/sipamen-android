@@ -4,7 +4,7 @@ import { Header, Left, Button, Icon, Body, Right, Title, Container } from 'nativ
 import ThemeContainer from '../particles/ThemeContainer'
 import PropTypes from 'prop-types'
 
-const DocumentList = (props) => (
+const DocumentSection = (props) => (
   <Container style={styles.container}>
     <Header>
       <Left>
@@ -34,7 +34,7 @@ const DocumentList = (props) => (
   </Container>
 )
 
-DocumentList.propTypes = {
+DocumentSection.propTypes = {
   refreshing: PropTypes.boolean,
   onRefresh: PropTypes.func,
   documentTitle: PropTypes.string,
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ThemeContainer(DocumentList)
+export default ThemeContainer(DocumentSection)

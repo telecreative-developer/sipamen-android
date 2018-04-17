@@ -41,26 +41,24 @@ const { height } = Dimensions.get('window')
 
 const bannerWidth = Dimensions.get('window').width
 
-const bannerHeight = height / 2.6
+const bannerHeight = height / 2.8
 
 class HomeContainer extends React.Component {
 
   async handleNavigateTo(item) {
-    const { setNavigate, dataStandarKompetensi, dataSerdik, dataHandbook } = this.props
+    const { setNavigate, dataStandarKompetensi, pokUji } = this.props
     if(item.type === 'standar-kompetensi') {
       setNavigate('DocumentViewer', dataStandarKompetensi)
     }else if(item.type === 'data-nilai') {
-      // setNavigate('Score', item)
-      Alert.alert('Pemberitahuan', 'Nilai belum bisa ditampilkan karena ujian belum dimulai.')
+      setNavigate('DocumentSection', {documentTitle: 'Data Nilai'})
     }else if(item.type === 'data-serdik') {
-      setNavigate('DocumentList', {documentTitle: 'Data Serdik', documentData: dataSerdik})
+      setNavigate('DocumentList', {documentTitle: 'Data Serdik', documentSlug: 'data-serdik'})
     }else if(item.type === 'kegiatan') {
       setNavigate('Timeline', item)
     }else if(item.type === 'handbook') {
-      setNavigate('DocumentList', {documentTitle: 'Handbook', documentData: dataHandbook, download: true})
+      setNavigate('DocumentList', {documentTitle: 'Handbook', documentSlug: 'handbook', download: true})
     }else if(item.type === 'pok-uji') {
-      // setNavigate('POKUji')
-      Alert.alert('Pemberitahuan', 'Kelompok ujian belum bisa ditampilkan karena ujian belum dimulai.')
+      setNavigate('DocumentViewer', pokUji)
     }
   }
 
@@ -111,8 +109,7 @@ class HomeContainer extends React.Component {
 const mapStateToProps = state => ({
   sessionPersistance: state.sessionPersistance,
   dataStandarKompetensi: state.dataStandarKompetensi,
-  dataSerdik: state.dataSerdik,
-  dataHandbook: state.dataHandbook,
+  pokUji: state.pokUji,
   banners: state.banners,
   dataInfoSespimmen: state.dataInfoSespimmen
 })

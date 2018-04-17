@@ -6,6 +6,7 @@ import { API_SERVER } from '../env'
 import { fetchDocuments } from './documents'
 import { getBearerToken } from './twitter'
 import { fetchScores } from './scores'
+import {fetchPokUji} from "./pokuji";
 
 export const login = (email, password, onesignalId) => {
 	return async dispatch => {
@@ -61,7 +62,8 @@ const fetchUserWithEmail = (email, password, accessToken, onesignalId) => {
         if(onesignalId !== undefined) {
           dispatch(initialOneSignal({onesignal_id: onesignalId, id: data.data[0].id}, accessToken))
         }
-        await dispatch(fetchScores(data.data[0].id, accessToken))
+        await dispatch(fetchScores(accessToken))
+				await dispatch(fetchPokUji(accessToken)),
         await dispatch(saveSession({ email, password, accessToken }))
         await dispatch(saveSessionPersistance({...data.data[0], accessToken}))
         await dispatch(setSuccess(true, 'SUCCESS_FETCH_USER_WITH_EMAIL'))

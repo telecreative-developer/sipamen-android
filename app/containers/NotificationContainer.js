@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import Notification from '../components/Notification'
 import { ListItem, Left, Thumbnail, Body, Text, Right } from 'native-base'
 import { connect } from 'react-redux'
@@ -52,8 +52,8 @@ class NotificationContainer extends React.PureComponent {
         renderTimelineNotifications={({item}) => (
           <ListItem avatar style={styles.listNotification} onPress={() => setNavigate('Post', {...item.posts[0], users: item.users})}>
             <Left>
-              {item.users[0] !== undefined ? (
-                item.users[0].avatar_url !== null ? (
+              {item.users ? (
+                item.users[0].avatar_url ? (
                   <Thumbnail source={{uri: item.users[0].avatar_url}} />
                 ) : (
                   <Thumbnail source={defaultAvatar} />

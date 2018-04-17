@@ -29,69 +29,41 @@ const Profile = (props) => (
   <Container style={styles.container}>
     {props.children}
     <Content showsVerticalScrollIndicator={false}>
-      <Tabs style={styles.tabs}>
-        <Tab heading='Personal Details'>
-          <View style={styles.profileHeader}>
-            {props.avatar !== null ? (
-              <Thumbnail large source={{uri: props.avatar}} />
-            ) : (
-              <Thumbnail large source={defaultAvatar} />
-            )}
-            <View style={styles.dataView}>
-              <Text style={styles.name}>
-                {props.userName}
-              </Text>
-              <Text style={styles.status}>{`SESPIMMEN ${props.forceOf}`}</Text>
-            </View>
-          </View>
-          <Form>
-            <Item stackedLabel style={styles.itemData}>
-              <Label>Nama Lengkap</Label>
-              <Input disabled value={props.userName} />
-            </Item>
-            <Item stackedLabel style={styles.itemData}>
-              <Label>Jenis Kelamin</Label>
-              <Input disabled value={props.gender === 1 ? 'Pria' : 'Wanita'} />
-            </Item>
-            <Item stackedLabel style={styles.itemData}>
-              <Label>Angkatan</Label>
-              <Input disabled value={`SESPIMMEN ${props.forceOf}`} />
-            </Item>
-            <Item stackedLabel style={styles.itemData}>
-              <Label>Tempat Lahir</Label>
-              <Input disabled value={props.birthOfPlace} />
-            </Item>
-            <Item stackedLabel style={styles.itemData}>
-              <Label>Tanggal Lahir</Label>
-              <Input disabled value={props.birthOfDate} />
-            </Item>
-          </Form>
-        </Tab>
-        <Tab heading='Nilai'>
-          <Content>
-            <Card>
-              <CardItem header>
-                <Text>NRK</Text>
-              </CardItem>
-              <CardItem>
-                <Body>
-                <H1>{props.nrk}</H1>
-                </Body>
-              </CardItem>
-            </Card>
-            <Card>
-              <CardItem header>
-                <Text>NAD</Text>
-              </CardItem>
-              <CardItem>
-                <Body>
-                <H1>{props.nad}</H1>
-                </Body>
-              </CardItem>
-            </Card>
-          </Content>
-        </Tab>
-      </Tabs>
+      <View style={styles.profileHeader}>
+        {props.avatar !== null ? (
+          <Thumbnail large source={{uri: props.avatar}} />
+        ) : (
+          <Thumbnail large source={defaultAvatar} />
+        )}
+        <View style={styles.dataView}>
+          <Text style={styles.name}>
+            {props.userName}
+          </Text>
+          <Text style={styles.status}>{`SESPIMMEN ${props.forceOf}`}</Text>
+        </View>
+      </View>
+      <Form>
+        <Item stackedLabel style={styles.itemData}>
+          <Label>Nama Lengkap</Label>
+          <Input disabled value={props.userName} />
+        </Item>
+        <Item stackedLabel style={styles.itemData}>
+          <Label>Jenis Kelamin</Label>
+          <Input disabled value={props.gender === 1 ? 'Pria' : 'Wanita'} />
+        </Item>
+        <Item stackedLabel style={styles.itemData}>
+          <Label>Angkatan</Label>
+          <Input disabled value={`SESPIMMEN ${props.forceOf}`} />
+        </Item>
+        <Item stackedLabel style={styles.itemData}>
+          <Label>Tempat Lahir</Label>
+          <Input disabled value={props.birthOfPlace} />
+        </Item>
+        <Item stackedLabel style={styles.itemData}>
+          <Label>Tanggal Lahir</Label>
+          <Input disabled value={props.birthOfDate} />
+        </Item>
+      </Form>
     </Content>
   </Container>
 )
