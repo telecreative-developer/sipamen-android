@@ -79,13 +79,14 @@ class RegisterContainer extends React.Component {
   }
 
   renderButtons() {
-    const { first_name, last_name, email, nrp, no_serdik, phone, password, confirmPassword } = this.state
+    const { first_name, last_name, email, nrp, no_serdik, force_of, phone, password, confirmPassword } = this.state
     const { loading } = this.props
     if (!isEmpty(first_name) &&
       !isEmpty(last_name) &&
       !isEmpty(email) &&
       nrp !== '' &&
       no_serdik !== '' &&
+      force_of !== '' &&
       phone !== '' &&
       !isEmpty(password) &&
       !isEmpty(confirmPassword)) {
