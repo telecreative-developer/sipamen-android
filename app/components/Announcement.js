@@ -15,7 +15,7 @@ const Announcement = (props) => (
       </Left>
       <Body>
         <Title>Pengumuman</Title>
-        <Subtitle>{moment(props.createdAt).format('LLL')}</Subtitle>
+        <Subtitle style={styles.subtitle}>{moment(props.createdAt).format('LLL')}</Subtitle>
       </Body>
       <Right />
     </Header>
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
   content: {
     marginHorizontal: 15,
     marginVertical: 15
+  },
+  subtitle: {
+    fontSize: 12
   }
 })
 

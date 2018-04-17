@@ -14,7 +14,6 @@ import DocumentListContainer from './app/containers/DocumentListContainer'
 import DocumentSectionContainer from './app/containers/DocumentSectionContainer'
 import DocumentViewerContainer from './app/containers/DocumentViewerContainer'
 import TimelineContainer from './app/containers/TimelineContainer'
-import POKUjiContainer from './app/containers/POKUjiContainer'
 import RegisterContainer from "./app/containers/RegisterContainer"
 import AnnouncementContainer from "./app/containers/AnnouncementContainer"
 
@@ -34,8 +33,7 @@ const AppNavigator = StackNavigator({
   Announcement: {screen: AnnouncementContainer},
   DocumentList: {screen: DocumentListContainer},
   DocumentSection: {screen: DocumentSectionContainer},
-  DocumentViewer: {screen: DocumentViewerContainer},
-  POKUji: {screen: POKUjiContainer}
+  DocumentViewer: {screen: DocumentViewerContainer}
 }, {
   headerMode: 'none'
 })
