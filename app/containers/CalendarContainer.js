@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Icon } from 'native-base'
 import { View, Text, StyleSheet, BackHandler, TouchableNativeFeedback } from 'react-native'
 import { connect } from 'react-redux'
@@ -6,13 +6,10 @@ import { setNavigate } from '../actions/processor'
 import Calendar from '../components/Calendar'
 import { fetchEvents } from '../actions/events'
 
-class CalendarContainer extends PureComponent {
+class CalendarContainer extends React.PureComponent {
   componentDidMount() {
     const { sessionPersistance, fetchEvents } = this.props
     fetchEvents(sessionPersistance.accessToken)
-  }
-
-  componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this.backPressed)
   }
 

@@ -36,7 +36,7 @@ class RegisterContainer extends React.Component {
     return false
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps) {
     if(nextProps.success.condition === true && nextProps.success.process_on === 'SUCCESS_REGISTER') {
       Alert.alert(
         'Register Berhasil!',
@@ -60,7 +60,7 @@ class RegisterContainer extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.backPressed)
   }
 
@@ -84,9 +84,9 @@ class RegisterContainer extends React.Component {
     if (!isEmpty(first_name) &&
       !isEmpty(last_name) &&
       !isEmpty(email) &&
-      !isEmpty(JSON.stringify(nrp)) &&
-      !isEmpty(JSON.stringify(no_serdik)) &&
-      !isEmpty(JSON.stringify(phone)) &&
+      nrp !== '' &&
+      no_serdik !== '' &&
+      phone !== '' &&
       !isEmpty(password) &&
       !isEmpty(confirmPassword)) {
       return (

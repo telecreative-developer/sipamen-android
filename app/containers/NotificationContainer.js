@@ -13,7 +13,8 @@ class NotificationContainer extends React.PureComponent {
     super()
 
     this.state = {
-      refreshing: false
+      refreshing: false,
+      items: {}
     }
   }
 
