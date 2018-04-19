@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, View, Image, Text, Dimensions } from 'react-native'
 import { Container, Header, Title, Subtitle, Left, Button, Icon, Body, Right } from 'native-base'
 import PdfViewer from 'react-native-pdf'
 import PropTypes from 'prop-types'
+import box from '../assets/images/box.png'
 import ThemeContainer from '../particles/ThemeContainer'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
@@ -41,11 +42,18 @@ const DocumentViewer = (props) => (
         </Right>
       </Header>
     )}
-    <PdfViewer
-      scale={props.scale}
-      onPageSingleTap={props.handleTap}
-      source={{uri: props.fileSource}}
-      style={styles.pdf} />
+    {!!props.fileSource ? (
+      <PdfViewer
+        scale={props.scale}
+        onPageSingleTap={props.handleTap}
+        source={{uri: props.fileSource}}
+        style={styles.pdf} />
+    ) : (
+      <View style={{flex: 1, alignItems: 'center', marginTop: 30}}>
+        <Image source={box} style={{width: 100, height: 100, opacity: 0.3}}/>
+        <Text style={{fontWeight: 'bold', opacity: 0.3, fontSize: 16}}>Belum ada konten</Text>
+      </View>
+    )}
   </Container>
 )
 

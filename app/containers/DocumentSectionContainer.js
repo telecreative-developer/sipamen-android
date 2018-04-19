@@ -43,7 +43,13 @@ class DocumentSectionContainer extends React.PureComponent {
   handleNavigateToViewer(title, item) {
     const { navigate } = this.props.navigation
     if(item.status) {
-      navigate('DocumentViewer', {document_title: title, document_subtitle: `${item.title}`, document_url: item.akademik_url})
+      if(title === 'Akademik') {
+        navigate('DocumentViewer', {document_title: title, document_subtitle: `${item.title}`, document_url: item.akademik_url})
+      }else if(title === 'Kepribadian') {
+        navigate('DocumentViewer', {document_title: title, document_subtitle: `${item.title}`, document_url: item.kepribadian_url})
+      }else if(title === 'Kesehatan Jasmani') {
+        navigate('DocumentViewer', {document_title: title, document_subtitle: `${item.title}`, document_url: item.kesehatan_url})
+      }
     }else{
       Alert.alert('Peringatan', `Mohon maaf untuk saat ini Data Nilai "${item.title}" belum dipublish admin`)
     }
@@ -71,8 +77,8 @@ class DocumentSectionContainer extends React.PureComponent {
             <ListItem onPress={() => this.handleNavigateToViewer('Kepribadian', item)}>
               <Text>Kepribadian</Text>
             </ListItem>
-            <ListItem onPress={() => this.handleNavigateToViewer('Kesehatan', item)}>
-              <Text>Kesehatan</Text>
+            <ListItem onPress={() => this.handleNavigateToViewer('Kesehatan Jasmani', item)}>
+              <Text>Kesehatan Jasmani</Text>
             </ListItem>
           </View>
         )}
