@@ -12,9 +12,9 @@ import './ReactotronConfig'
 const store = Reactotron.createStore(rootReducers, applyMiddleware(thunk, navigationDebouncer(600)))
 
 const App = () => (
-  <Provider store={store}>
-    <AppNavigator />
-  </Provider>
+	<Provider store={store}>
+		<AppNavigator />
+	</Provider>
 )
 
 AppRegistry.registerComponent('Sipamen', () => App)

@@ -3,13 +3,15 @@ import { StyleSheet, View, FlatList } from 'react-native'
 import { Container, Content, Text } from 'native-base'
 import PropTypes from 'prop-types'
 
-const Twitter = (props) => (
+const Twitter = props => (
   <Container style={styles.container}>
     <FlatList
       refreshing={props.refreshing}
       onRefresh={props.onRefresh}
       data={props.tweets}
-      renderItem={props.renderTweets} />
+      keyExtractor={(item, index) => JSON.stringify(index)}
+      renderItem={props.renderTweets}
+    />
   </Container>
 )
 
@@ -20,7 +22,7 @@ Twitter.propTypes = {
   renderTweets: PropTypes.func
 }
 
-const styles  = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF'
   }

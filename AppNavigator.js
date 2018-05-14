@@ -14,28 +14,33 @@ import DocumentListContainer from './app/containers/DocumentListContainer'
 import DocumentSectionContainer from './app/containers/DocumentSectionContainer'
 import DocumentViewerContainer from './app/containers/DocumentViewerContainer'
 import TimelineContainer from './app/containers/TimelineContainer'
-import RegisterContainer from "./app/containers/RegisterContainer"
-import AnnouncementContainer from "./app/containers/AnnouncementContainer"
+import RegisterContainer from './app/containers/RegisterContainer'
+import AnnouncementContainer from './app/containers/AnnouncementContainer'
+import ScoreListContainer from './app/containers/ScoreListContainer'
 
-const AppNavigator = StackNavigator({
-  Splash: {screen: SplashContainer},
-  ComponentPage: {screen: ComponentContainer},
-  Login: {screen: LoginContainer},
-  Register: {screen: RegisterContainer},
-  EditProfile: {screen: EditProfileContainer},
-  ChangePassword: {screen: ChangePasswordContainer},
-  Timeline: {screen: TimelineContainer},
-  ReportBug: {screen: ReportBugContainer},
-  Calendar: {screen: CalendarContainer},
-  Post: {screen: PostContainer},
-  CreatePost: {screen: CreatePostContainer},
-  Event: {screen: EventContainer},
-  Announcement: {screen: AnnouncementContainer},
-  DocumentList: {screen: DocumentListContainer},
-  DocumentSection: {screen: DocumentSectionContainer},
-  DocumentViewer: {screen: DocumentViewerContainer}
-}, {
-  headerMode: 'none'
-})
+const AppNavigator = StackNavigator(
+    {
+        Splash: { screen: SplashContainer },
+        ComponentPage: { screen: ComponentContainer },
+        Login: { screen: LoginContainer },
+        Register: { screen: RegisterContainer },
+        EditProfile: { screen: EditProfileContainer },
+        ChangePassword: { screen: ChangePasswordContainer },
+        Timeline: { screen: TimelineContainer },
+        ReportBug: { screen: ReportBugContainer },
+        Calendar: { screen: CalendarContainer },
+        Post: { screen: PostContainer },
+        CreatePost: { screen: CreatePostContainer },
+        Event: { screen: EventContainer },
+        Announcement: { screen: AnnouncementContainer },
+        DocumentList: { screen: DocumentListContainer },
+        DocumentSection: { screen: DocumentSectionContainer },
+        DocumentViewer: { screen: DocumentViewerContainer },
+        ScoreList: { screen: ScoreListContainer }
+    },
+    {
+        headerMode: 'none'
+    }
+)
 
 export default AppNavigator
