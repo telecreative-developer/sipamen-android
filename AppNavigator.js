@@ -17,7 +17,8 @@ import TimelineContainer from './app/containers/TimelineContainer'
 import RegisterContainer from './app/containers/RegisterContainer'
 import AnnouncementContainer from './app/containers/AnnouncementContainer'
 import ScoreListContainer from './app/containers/ScoreListContainer'
-import AcademicCategoryContainer from './app/containers/AcademicCategoryContainer'
+import AcademicCategoriesContainer from './app/containers/AcademicCategoriesContainer'
+import AcademicScoresContainer from './app/containers/AcademicScoresContainer'
 
 const AppNavigator = StackNavigator(
     {
@@ -38,7 +39,8 @@ const AppNavigator = StackNavigator(
         DocumentSection: { screen: DocumentSectionContainer },
         DocumentViewer: { screen: DocumentViewerContainer },
         ScoreList: { screen: ScoreListContainer },
-        AcademicCategory: { screen:AcademicCategoryContainer }
+        AcademicCategories: { screen:AcademicCategoriesContainer },
+        AcademicScores: { screen:AcademicScoresContainer }
     },
     {
         headerMode: 'none'

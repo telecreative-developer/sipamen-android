@@ -1,8 +1,8 @@
-import { RECEIVED_ACADEMYCATEGORIES } from '../constants'
+import { RECEIVED_ACADEMICCATEGORIES } from '../constants'
 
 export const academiccategories = (state = [], action) => {
   switch (action.type) {
-    case RECEIVED_ACADEMYCATEGORIES:
+    case RECEIVED_ACADEMICCATEGORIES:
       return action.payload
     default:
       return state
