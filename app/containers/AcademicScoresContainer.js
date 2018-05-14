@@ -14,6 +14,7 @@ class AcademicScoresContainer extends React.PureComponent {
 		this.props.fetchAcademicScores(this.props.navigation.state.params.academic_category_id, this.props.sessionPersistance.accessToken)
 	}
 
+	
 	render() {
 		return (
 			<AcademicScores
@@ -22,6 +23,7 @@ class AcademicScoresContainer extends React.PureComponent {
 				scoreMenu={this.props.academicscores}
 				renderItems={({item}) => (
 					<ListItem button onPress={()=> this.props.navigation.navigate('DocumentViewer', {
+						item,
 						document_url: item.file_url,
 						document_title: item.title
 					})}>

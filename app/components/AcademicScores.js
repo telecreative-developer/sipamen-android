@@ -14,9 +14,12 @@ import {
 } from 'native-base'
 import ThemeContainer from '../particles/ThemeContainer'
 import PropTypes from 'prop-types'
+import {View, Image} from 'react-native'
+import box from '../assets/images/box.png'
 
-const AcademicScores = props => {
+const AcademicScores = (props) => {
   return(
+ 
     <Container style={styles.container}>
       <Header>
         <Left>
@@ -30,15 +33,22 @@ const AcademicScores = props => {
         <Right />
       </Header>
       <Content>
+      {props.scoreMenu.length ? (
         <FlatList
           data={props.scoreMenu}
           keyExtractor={(item, index) => JSON.stringify(index)}
           renderItem={props.renderItems}
         />
+      ):(
+          <View style={{flex: 1, alignItems: 'center', marginTop: 30}}>
+            <Image source={box} style={{width: 100, height: 100, opacity: 0.3}}/>
+            <Text style={{fontWeight: 'bold', opacity: 0.3, fontSize: 16}}>Belum ada konten</Text>
+          </View>
+      )}
+        
       </Content>
     </Container>
-  )
-}
+)}
 
 AcademicScores.propTypes = {
   title: PropTypes.string,
