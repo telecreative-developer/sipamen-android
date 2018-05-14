@@ -33,11 +33,26 @@ class ScoreListContainer extends React.PureComponent {
 				title="Data Nilai"
 				handleBack={() => this.props.navigation.goBack()}
 				scoreMenu={scoreMenu}
-				renderItems={({ item }) => (
-					<ListItem>
-						<Text>{item.menu}</Text>
-					</ListItem>
-				)}
+				renderItems={({ item }) => {
+					if(item.menu == 'Akademik'){
+						return (
+							<ListItem 
+								button 
+								onPress={()=> this.props.navigation.navigate('AcademicCategory',{
+									score: item
+								})}
+							>
+								<Text>{item.menu}</Text>
+							</ListItem>
+						)
+					}
+					return(
+						<ListItem>
+							<Text>{item.menu}</Text>
+						</ListItem>
+					)
+				}
+			}
 			/>
 		)
 	}
