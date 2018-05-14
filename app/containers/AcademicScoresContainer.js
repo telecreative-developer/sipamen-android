@@ -21,7 +21,10 @@ class AcademicScoresContainer extends React.PureComponent {
 				handleBack={() => this.props.navigation.goBack()}
 				scoreMenu={this.props.academicscores}
 				renderItems={({item}) => (
-					<ListItem>
+					<ListItem button onPress={()=> this.props.navigation.navigate('DocumentViewer', {
+						document_url: item.file_url,
+						document_title: item.title
+					})}>
 						<Text>{item.title}</Text>
 					</ListItem>
 				)}
