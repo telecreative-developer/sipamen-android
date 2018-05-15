@@ -17,7 +17,7 @@ import PropTypes from 'prop-types'
 import {View, Image} from 'react-native'
 import box from '../assets/images/box.png'
 
-const AcademicTitleScores = (props) => {
+const TitleScores = (props) => {
   return(
  
     <Container style={styles.container}>
@@ -50,7 +50,7 @@ const AcademicTitleScores = (props) => {
     </Container>
 )}
 
-AcademicTitleScores.propTypes = {
+TitleScores.propTypes = {
   title: PropTypes.string,
   handleBack: PropTypes.func
 }
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ThemeContainer(AcademicTitleScores)
+export default ThemeContainer(TitleScores)

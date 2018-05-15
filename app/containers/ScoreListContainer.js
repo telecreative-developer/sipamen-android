@@ -6,19 +6,24 @@ import ScoreList from '../components/ScoreList'
 
 const scoreMenu = [
 	{
-		menu: 'Akademik'
+		menu: 'Akademik',
+		table: 'academic_categories'
 	},
 	{
-		menu: 'Kepribadian'
+		menu: 'Kepribadian',
+		table: 'personalities-scores'
 	},
 	{
-		menu: 'Kesehatan Jasmani'
+		menu: 'Kesehatan Jasmani',
+		table: 'health-scores'
 	},
 	{
-		menu: 'Nilai Kegiatan Khusus'
+		menu: 'Nilai Kegiatan Khusus',
+		table: 'activities-scores'
 	},
 	{
-		menu: 'Nilai Gabungan'
+		menu: 'Nilai Gabungan',
+		table: 'gabungan-scores'
 	}
 ]
 
@@ -38,7 +43,7 @@ class ScoreListContainer extends React.PureComponent {
 						return (
 							<ListItem 
 								button 
-								onPress={()=> this.props.navigation.navigate('AcademicCategories',item)}
+								onPress={()=> this.props.navigation.navigate('AcademicCategories', item)}
 							>
 								<Text>{item.menu}</Text>
 							</ListItem>
@@ -47,7 +52,7 @@ class ScoreListContainer extends React.PureComponent {
 					return (
 						<ListItem 
 							button 
-							onPress={()=> this.props.navigation.navigate('AcademicTitleScores', {title: item.menu})}
+							onPress={()=> this.props.navigation.navigate('TitleScores', {title: item.menu, table: item.table})}
 						>
 							<Text>{item.menu}</Text>
 						</ListItem>

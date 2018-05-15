@@ -12,14 +12,15 @@ import { scores } from './scores'
 import { dataImages } from './images'
 import { banners } from "./banners"
 import { academiccategories } from "./academiccategories"
-import { academicscores, academictitlescores } from "./academicscores"
+import { academicscores } from "./academicscores"
+import { titlescores } from "./titlescores"
 
 const rootReducers = combineReducers({
   posts, events, banners, comments, sessionPersistance, notifications,
   loading, loadingDownload, success, successDownload, failed, failedDownload,
   navigate, activePageHome, myPosts, generalNotificationEvents, generalNotificationAnnouncements, twitterToken,
   dataStandarKompetensi, dataSerdik, dataHandbook, dataInfoSespimmen, pokUji, tweets, scores, dataImages, 
-  academiccategories, academicscores, academictitlescores
+  academiccategories, academicscores, titlescores
 })
 
 export default rootReducers
