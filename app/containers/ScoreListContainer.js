@@ -38,9 +38,7 @@ class ScoreListContainer extends React.PureComponent {
 						return (
 							<ListItem 
 								button 
-								onPress={()=> this.props.navigation.navigate('AcademicCategories',{
-									score: item
-								})}
+								onPress={()=> this.props.navigation.navigate('AcademicCategories',item)}
 							>
 								<Text>{item.menu}</Text>
 							</ListItem>
