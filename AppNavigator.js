@@ -19,6 +19,7 @@ import AnnouncementContainer from './app/containers/AnnouncementContainer'
 import ScoreListContainer from './app/containers/ScoreListContainer'
 import AcademicCategoriesContainer from './app/containers/AcademicCategoriesContainer'
 import AcademicScoresContainer from './app/containers/AcademicScoresContainer'
+import AcademicTitleScoresContainer from './app/containers/AcademicTitleScoresContainer'
 
 const AppNavigator = StackNavigator(
     {
@@ -40,7 +41,8 @@ const AppNavigator = StackNavigator(
         DocumentViewer: { screen: DocumentViewerContainer },
         ScoreList: { screen: ScoreListContainer },
         AcademicCategories: { screen:AcademicCategoriesContainer },
-        AcademicScores: { screen:AcademicScoresContainer }
+        AcademicScores: { screen:AcademicScoresContainer },
+        AcademicTitleScores: { screen:AcademicTitleScoresContainer }
     },
     {
         headerMode: 'none'
