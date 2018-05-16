@@ -40,9 +40,9 @@ const AppNavigator = StackNavigator(
         DocumentSection: { screen: DocumentSectionContainer },
         DocumentViewer: { screen: DocumentViewerContainer },
         ScoreList: { screen: ScoreListContainer },
-        AcademicCategories: { screen:AcademicCategoriesContainer },
-        AcademicScores: { screen:AcademicScoresContainer },
-        TitleScores: { screen:TitleScoresContainer }
+        AcademicCategories: { screen: AcademicCategoriesContainer },
+        AcademicScores: { screen: AcademicScoresContainer },
+        TitleScores: { screen: TitleScoresContainer }
     },
     {
         headerMode: 'none'
