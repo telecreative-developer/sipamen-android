@@ -94,15 +94,15 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.sipamen"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 12
-        versionName "1.11"
+        targetSdkVersion 26
+        versionCode 14
+        versionName "1.13"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
