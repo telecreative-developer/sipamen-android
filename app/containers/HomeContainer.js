@@ -8,6 +8,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native'
+import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
 import { setNavigate } from '../actions/processor'
 import Home from '../components/Home'
@@ -70,6 +71,22 @@ class HomeContainer extends React.Component {
       })
     } else if (item.type === 'pok-uji') {
       setNavigate('DocumentViewer', pokUji)
+    }
+  }
+
+  componentWillMount() {
+    OneSignal.addEventListener('opened', this.onOpened)
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('opened', this.onOpened)
+  }
+
+  onOpened = openResult => {
+    if (openResult.notification.payload.additionalData.screen === 'announcement') {
+      this.props.setNavigate('Announcement', openResult.notification.payload.additionalData.data)
+    } else if (openResult.notification.payload.additionalData.screen === 'score') {
+      this.props.setNavigate('ScoreList')
     }
   }
 
