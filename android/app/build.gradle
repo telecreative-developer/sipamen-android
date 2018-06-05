@@ -101,7 +101,7 @@ android {
         applicationId "com.sipamen"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 15
+        versionCode 16
         versionName "1.15"
         ndk {
             abiFilters "armeabi-v7a", "x86"
